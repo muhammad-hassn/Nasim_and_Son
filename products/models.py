@@ -27,7 +27,7 @@ class Category(SEOModel):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('products:category_products', args=[self.slug])
+        return reverse('products:resolver', args=[self.slug])
 
 class Product(SEOModel):
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
@@ -53,4 +53,4 @@ class Product(SEOModel):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('products:product_detail', args=[self.slug])
+        return reverse('products:resolver', args=[self.slug])
