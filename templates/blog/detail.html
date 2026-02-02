@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.meta_title|default:post.title }} | {{ company_name }}{% endblock %}
+{% block meta_description %}{{ post.meta_description }}{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 60px 20px; max-width: 900px;">
+    <img src="{{ post.image.url }}" alt="{{ post.title }}" style="width: 100%; border-radius: 8px; margin-bottom: 30px;">
+    
+    <h1>{{ post.title }}</h1>
+    <p style="color: #666; margin-bottom: 30px;">Published on {{ post.created_at|date:"F d, Y" }} | Category: {{ post.category.name|default:"General" }}</p>
+    
+    <div class="blog-content" style="line-height: 1.8; font-size: 1.1rem;">
+        {{ post.content|safe }}
+    </div>
+
+    <!-- Related Posts -->
+    {% if related_posts %}
+    <div class="related-posts" style="margin-top: 60px; border-top: 1px solid #eee; padding-top: 40px;">
+        <h3>Related Posts</h3>
+        <div class="grid" style="grid-template-columns: repeat(3, 1fr);">
+            {% for related in related_posts %}
+            <div class="card">
+                <div class="card-body">
+                    <h4><a href="{{ related.get_absolute_url }}">{{ related.title }}</a></h4>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

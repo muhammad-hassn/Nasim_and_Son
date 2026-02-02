@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product.meta_title|default:product.name }} | {{ company_name }}{% endblock %}
+{% block meta_description %}{{ product.meta_description|default:product.short_description }}{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 60px 20px;">
+    <div class="grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="product-image">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 100%; border-radius: 8px;">
+        </div>
+        <div class="product-info">
+            <h1>{{ product.name }}</h1>
+            <p class="category" style="color: #666; margin-bottom: 20px;">Category: <a href="{{ product.category.get_absolute_url }}">{{ product.category.name }}</a></p>
+            
+            <div class="description" style="margin-bottom: 30px;">
+                {{ product.full_description|linebreaks }}
+            </div>
+
+            {% if product.applications %}
+            <h3>Applications</h3>
+            <div class="applications" style="margin-bottom: 20px;">
+                {{ product.applications|linebreaks }}
+            </div>
+            {% endif %}
+
+            <div class="actions">
+                <a href="{% url 'inquiries:add_to_quote' product.id %}" class="btn">Request Quote / Inquiry</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Related Products -->
+    {% if related_products %}
+    <div class="related-products" style="margin-top: 60px;">
+        <h2>Related Products</h2>
+        <div class="grid">
+            {% for related in related_products %}
+            <div class="card">
+                <img src="{{ related.image.url }}" alt="{{ related.name }}">
+                <div class="card-body">
+                    <h3 class="card-title">{{ related.name }}</h3>
+                    <a href="{{ related.get_absolute_url }}" class="btn">View Details</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

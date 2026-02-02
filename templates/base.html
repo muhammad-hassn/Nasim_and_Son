@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ company_name }}{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Leading chemical solutions provider.{% endblock %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <a href="{% url 'core:home' %}">{{ company_name }}</a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="{% url 'core:home' %}">Home</a></li>
+                    <li><a href="{% url 'core:company' %}">Company</a></li>
+                    <li><a href="{% url 'products:landing' %}">Products</a></li>
+                    <li><a href="{% url 'blog:list' %}">Blog</a></li>
+                    <li><a href="{% url 'core:contact' %}">Contact Us</a></li>
+                    <li><a href="{% url 'inquiries:quote_list' %}" class="btn-outline">Quote Request ({% if cart_count %}{{ cart_count }}{% else %}0{% endif %})</a></li>
+                </ul>
+                <div class="mobile-menu-toggle">
+                    <!-- Hamburger Icon -->
+                    <span></span><span></span><span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        {% if messages %}
+        <div class="container" style="margin-top: 20px;">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>About Us</h3>
+                    <p>{{ company_name }} is a premier supplier of industrial chemicals, serving global markets with quality and reliability.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="{% url 'core:home' %}">Home</a></li>
+                        <li><a href="{% url 'products:landing' %}">Products</a></li>
+                        <li><a href="{% url 'blog:list' %}">Blog</a></li>
+                        <li><a href="{% url 'core:contact' %}">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <p>Email: info@{{ meta_site_domain }}</p>
+                    <p>Phone: +92 300 1234567</p>
+                    <p>Address: Industrial Area, Karachi, Pakistan</p>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; {% now "Y" %} {{ company_name }}. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

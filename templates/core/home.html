@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home | {{ company_name }}{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <h1>Nasim and Sons Chemical Solutions</h1>
+        <p>Your trusted partner for quality industrial chemicals and dyes.</p>
+        <a href="{% url 'products:landing' %}" class="btn">View Products</a>
+        <a href="{% url 'core:contact' %}" class="btn" style="background:transparent; border:1px solid #fff;">Contact Us</a>
+    </div>
+</section>
+
+<section class="container" style="padding: 60px 0;">
+    <h2 style="text-align: center; margin-bottom: 40px;">Our Product Categories</h2>
+    <div class="grid">
+        {% for category in categories %}
+        <div class="card">
+            {% if category.image %}
+            <img src="{{ category.image.url }}" alt="{{ category.name }}">
+            {% else %}
+            <img src="{% static 'images/placeholder.jpg' %}" alt="{{ category.name }}">
+            {% endif %}
+            <div class="card-body">
+                <h3 class="card-title">{{ category.name }}</h3>
+                <a href="{{ category.get_absolute_url }}" class="btn">View Products</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section style="background: #f4f4f4; padding: 60px 0;">
+    <div class="container">
+        <h2 style="text-align: center; margin-bottom: 40px;">Why Choose Us</h2>
+        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+            <div class="card-body" style="text-align: center;">
+                <h3>Quality Assurance</h3>
+                <p>ISO Certified products with strict quality control.</p>
+            </div>
+            <div class="card-body" style="text-align: center;">
+                <h3>Global Presence</h3>
+                <p>Exporting to UAE, Bangladesh, Turkey, and China.</p>
+            </div>
+            <div class="card-body" style="text-align: center;">
+                <h3>Technical Support</h3>
+                <p>Expert team available for technical guidance.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container" style="padding: 60px 0;">
+    <h2 style="text-align: center; margin-bottom: 40px;">Latest from Blog</h2>
+    <div class="grid">
+        {% for post in latest_posts %}
+        <div class="card">
+            {% if post.image %}
+            <img src="{{ post.image.url }}" alt="{{ post.title }}">
+            {% endif %}
+            <div class="card-body">
+                <h3 class="card-title">{{ post.title }}</h3>
+                <a href="{{ post.get_absolute_url }}" style="color: var(--primary-color);">Read More &rarr;</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

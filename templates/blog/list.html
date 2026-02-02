@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Blog & Insights | {{ company_name }}{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 60px 20px;">
+    <h1 style="text-align: center; margin-bottom: 40px;">Company Blog & Insights</h1>
+    
+    <div class="grid">
+        {% for post in posts %}
+        <div class="card">
+            {% if post.image %}
+            <img src="{{ post.image.url }}" alt="{{ post.title }}">
+            {% else %}
+            <img src="{% static 'images/placeholder.jpg' %}" alt="{{ post.title }}">
+            {% endif %}
+            <div class="card-body">
+                <h3 class="card-title">{{ post.title }}</h3>
+                <p style="color: #666; font-size: 0.9rem;">{{ post.created_at|date:"F d, Y" }}</p>
+                <a href="{{ post.get_absolute_url }}" class="btn" style="margin-top: 10px;">Read More</a>
+            </div>
+        </div>
+        {% empty %}
+        <p>No blog posts published yet.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

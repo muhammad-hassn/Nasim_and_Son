@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact Us | {{ company_name }}{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 60px 20px;">
+    <h1>Contact Us</h1>
+    <div class="grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="contact-info">
+            <h3>Head Office</h3>
+            <p>123 Industrial Estate, Karachi, Pakistan</p>
+            <p><strong>Phone:</strong> +92 300 1234567</p>
+            <p><strong>Email:</strong> info@nasimandsons.com</p>
+            
+            <h3 style="margin-top: 30px;">Global Offices</h3>
+            <ul>
+                <li>UAE: Dubai Industrial City</li>
+                <li>China: Shanghai Trading Hub</li>
+            </ul>
+        </div>
+        
+        <div class="contact-form">
+            <h2>Send us a Message</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" name="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="tel" name="phone" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Subject</label>
+                    <input type="text" name="subject" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea name="message" class="form-control" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
