@@ -1,29 +1,106 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Blog & Insights | {{ company_name }}{% endblock %}
+{% block title %}Industry Insights | {{ company_name }}{% endblock %}
 
 {% block content %}
-<div class="container" style="padding: 60px 20px;">
-    <h1 style="text-align: center; margin-bottom: 40px;">Company Blog & Insights</h1>
-    
-    <div class="grid">
-        {% for post in posts %}
-        <div class="card">
-            {% if post.image %}
-            <img src="{{ post.image.url }}" alt="{{ post.title }}">
-            {% else %}
-            <img src="{% static 'images/placeholder.jpg' %}" alt="{{ post.title }}">
-            {% endif %}
-            <div class="card-body">
-                <h3 class="card-title">{{ post.title }}</h3>
-                <p style="color: #666; font-size: 0.9rem;">{{ post.created_at|date:"F d, Y" }}</p>
-                <a href="{{ post.get_absolute_url }}" class="btn" style="margin-top: 10px;">Read More</a>
+<!-- Page Header -->
+<section style="background: linear-gradient(rgba(26, 54, 93, 0.9), rgba(26, 54, 93, 0.9)); padding: 5rem 0; color: var(--white); text-align: center;">
+    <div class="container" data-aos="fade-in">
+        <span style="color: var(--accent-color); font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">Our Blog</span>
+        <h1 style="margin-top: 1rem; margin-bottom: 1rem; font-size: 3rem;">Industry Insights</h1>
+        <p style="font-size: 1.25rem; opacity: 0.9; max-width: 600px; margin: 0 auto; line-height: 1.6;">
+            Stay updated with the latest trends, technical guides, and company announcements.
+        </p>
+    </div>
+</section>
+
+<!-- Blog Grid -->
+<section class="section">
+    <div class="container">
+        <!-- Optional: Featured Post (First one) -->
+         {% if posts and posts.number == 1 and posts.0 %}
+         <div class="card" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0; overflow: hidden; margin-bottom: 4rem; min-height: 400px; align-items: stretch;" data-aos="fade-up">
+             <div style="position: relative; min-height: 300px;">
+                 {% if posts.0.image %}
+                 <img src="{{ posts.0.image.url }}" alt="{{ posts.0.title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                 {% else %}
+                 <div style="width: 100%; height: 100%; background: #e2e8f0; display: flex; align-items: center; justify-content: center;">
+                     <i class="fas fa-newspaper" style="font-size: 4rem; color: #cbd5e1;"></i>
+                 </div>
+                 {% endif %}
+             </div>
+             <div class="card-body" style="padding: 3rem; display: flex; flex-direction: column; justify-content: center;">
+                 <div style="margin-bottom: 1rem; color: var(--accent-color); font-weight: 600;">Featured Article</div>
+                 <h2 style="font-size: 2rem; margin-bottom: 1rem;"><a href="{{ posts.0.get_absolute_url }}" style="color: var(--text-main);">{{ posts.0.title }}</a></h2>
+                 <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem;">
+                     {{ posts.0.content|striptags|truncatewords:30 }}
+                 </p>
+                 <a href="{{ posts.0.get_absolute_url }}" class="btn btn-outline btn-dark-outline" style="align-self: start;">Read Full Article</a>
+             </div>
+             
+             <style>
+                 @media (max-width: 768px) {
+                     .card[style*="grid-template-columns: 1fr 1fr"] {
+                         grid-template-columns: 1fr !important;
+                     }
+                 }
+             </style>
+         </div>
+         {% endif %}
+
+        <div class="grid grid-3">
+            {% for post in posts %}
+                {% if not forloop.first or posts.number > 1 %} <!-- Skip first if on page 1 (since it's featured), or logic to show all if preferred. Let's show all but styled differently? Or simply skip first. Let's skip first on page 1. -->
+                <div class="card" data-aos="fade-up" data-aos-delay="100">
+                    <div style="height: 220px; position: relative; overflow: hidden;">
+                        {% if post.image %}
+                        <img src="{{ post.image.url }}" alt="{{ post.title }}" class="card-img-top" style="height: 100%; width: 100%; object-fit: cover; transition: transform 0.5s;">
+                        {% else %}
+                        <div style="height: 100%; background: #f1f5f9; display: flex; align-items: center; justify-content: center;">
+                            <i class="far fa-file-alt" style="font-size: 3rem; color: #cbd5e1;"></i>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                         <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                            {{ post.created_at|date:"F d, Y" }}
+                        </div>
+                        <h3 class="card-title" style="font-size: 1.25rem; line-height: 1.4;"><a href="{{ post.get_absolute_url }}" style="color: var(--text-main);">{{ post.title }}</a></h3>
+                        <p class="card-text">{{ post.content|striptags|truncatewords:15 }}</p>
+                        <a href="{{ post.get_absolute_url }}" style="color: var(--accent-color); font-weight: 600; font-size: 0.9rem;">Read More &rarr;</a>
+                    </div>
+                </div>
+                {% endif %}
+            {% empty %}
+                {% if not posts %}
+                <div style="grid-column: 1 / -1; text-align: center; padding: 4rem;">
+                    <p style="font-size: 1.2rem; color: var(--text-muted);">No articles published yet.</p>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        
+        <!-- Pagination -->
+        {% if is_paginated %}
+        <div style="margin-top: 4rem; text-align: center;">
+            <div class="pagination">
+                {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline btn-dark-outline" style="padding: 0.5rem 1rem;">&larr; Previous</a>
+                {% endif %}
+                
+                <span style="font-weight: 600; margin: 0 1rem; color: var(--text-muted);">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline btn-dark-outline" style="padding: 0.5rem 1rem;">Next &rarr;</a>
+                {% endif %}
             </div>
         </div>
-        {% empty %}
-        <p>No blog posts published yet.</p>
-        {% endfor %}
+        {% endif %}
     </div>
-</div>
+</section>
+
+<style>
+    .card:hover img { transform: scale(1.05); }
+</style>
 {% endblock %}

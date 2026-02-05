@@ -1,31 +1,130 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}About Us | {{ company_name }}{% endblock %}
 
 {% block content %}
-<div class="container" style="padding: 60px 20px;">
-    <h1>About {{ company_name }}</h1>
-    <div class="content" style="max-width: 800px; margin-top: 20px;">
-        <p><strong>Nasim and Sons</strong> is a leading name in the industrial chemicals market. Established with a vision to provide high-quality chemical solutions, we have grown into a trusted partner for various industries including Textile, Denim, Agriculture, and Paint & Coating.</p>
-        
-        <h2 style="margin-top: 40px;">Our Mission</h2>
-        <p>To deliver superior quality products that enhance the value of our clients' businesses while maintaining sustainable and ethical practices.</p>
-
-        <h2 style="margin-top: 40px;">Industries We Serve</h2>
-        <ul>
-            <li>Textile & Denim Industry</li>
-            <li>Oil & Gas Sector</li>
-            <li>Leather & Pharmaceuticals</li>
-            <li>Agriculture & Poultry</li>
-            <li>Paint & Coating Industry</li>
-            <li>Plastic Industry</li>
-        </ul>
-
-        <h2 style="margin-top: 40px;">Global Presence</h2>
-        <p>We are proud to have a strong footprint in Pakistan, with growing operations in UAE, Bangladesh, Turkey, and China.</p>
-
-        <h2 style="margin-top: 40px;">Certifications</h2>
-        <p>We adhere to international standards and hold various certifications including ISO 9001 and environmental compliance certifications.</p>
+<!-- Hero Section -->
+<section style="position: relative; padding: 6rem 0; background: linear-gradient(rgba(26, 54, 93, 0.95), rgba(26, 54, 93, 0.85)), url('https://www.transparenttextures.com/patterns/cubes.png'); color: var(--white); overflow: hidden;">
+    <div class="container" style="position: relative; z-index: 2; text-align: center;" data-aos="fade-up">
+        <span style="color: var(--accent-color); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem;">Since 1998</span>
+        <h1 style="font-size: 3.5rem; margin-top: 1rem; margin-bottom: 2rem; font-weight: 800;">Pioneering Excellence</h1>
+        <p style="font-size: 1.25rem; opacity: 0.9; max-width: 800px; margin: 0 auto; line-height: 1.8;">
+            Nasim and Sons has grown from a local supplier to a global leader in industrial chemicals, driven by innovation and a commitment to quality.
+        </p>
     </div>
-</div>
+</section>
+
+<!-- Mission & Vision Cards (Overlap Hero) -->
+<section class="section" style="padding-top: 0; margin-top: -3rem;">
+    <div class="container">
+        <div class="grid grid-2" style="gap: 2rem;">
+            <div class="card glass-panel" style="background: var(--bg-white); border: none; box-shadow: var(--shadow-lg); padding: 2.5rem;" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-bullseye" style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 1.5rem;"></i>
+                <h3 style="margin-bottom: 1rem;">Our Mission</h3>
+                <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.7;">
+                    To empower industries with superior chemical solutions that enhance productivity and sustainability, while fostering long-term partnerships built on trust and integrity.
+                </p>
+            </div>
+            <div class="card glass-panel" style="background: var(--bg-white); border: none; box-shadow: var(--shadow-lg); padding: 2.5rem;" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-eye" style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1.5rem;"></i>
+                <h3 style="margin-bottom: 1rem;">Our Vision</h3>
+                <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.7;">
+                    To be the global benchmark for quality and innovation in the chemical supply chain, driving progress in every industry we serve.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Timeline / History -->
+<section class="section">
+    <div class="container">
+        <h2 style="text-align: center; margin-bottom: 4rem;">Our Journey</h2>
+        <div class="timeline" style="position: relative; max-width: 800px; margin: 0 auto;">
+            <!-- Vertical Line -->
+            <div style="position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: var(--border-color);"></div>
+            
+            <!-- Item 1 -->
+            <div style="position: relative; padding-left: 60px; margin-bottom: 3rem;" data-aos="fade-right">
+                <div style="position: absolute; left: 11px; top: 0; width: 20px; height: 20px; background: var(--accent-color); border-radius: 50%; border: 4px solid white; box-shadow: var(--shadow-sm);"></div>
+                <h3 style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 0.5rem;">1998 - Inception</h3>
+                <p style="color: var(--text-muted);">Founded as a small trading house for textile dyes in Karachi, setting the foundation for quality service.</p>
+            </div>
+            
+            <!-- Item 2 -->
+            <div style="position: relative; padding-left: 60px; margin-bottom: 3rem;" data-aos="fade-right" data-aos-delay="100">
+                <div style="position: absolute; left: 11px; top: 0; width: 20px; height: 20px; background: var(--primary-color); border-radius: 50%; border: 4px solid white; box-shadow: var(--shadow-sm);"></div>
+                <h3 style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 0.5rem;">2005 - Expansion</h3>
+                <p style="color: var(--text-muted);">Expanded portfolio to include industrial chemicals for Agriculture and Paint sectors.</p>
+            </div>
+
+            <!-- Item 3 -->
+            <div style="position: relative; padding-left: 60px; margin-bottom: 3rem;" data-aos="fade-right" data-aos-delay="200">
+                <div style="position: absolute; left: 11px; top: 0; width: 20px; height: 20px; background: var(--primary-color); border-radius: 50%; border: 4px solid white; box-shadow: var(--shadow-sm);"></div>
+                <h3 style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 0.5rem;">2015 - Global Reach</h3>
+                <p style="color: var(--text-muted);">Established export operations to UAE and Bangladesh, marking our entry into the international market.</p>
+            </div>
+
+            <!-- Item 4 -->
+            <div style="position: relative; padding-left: 60px;" data-aos="fade-right" data-aos-delay="300">
+                <div style="position: absolute; left: 11px; top: 0; width: 20px; height: 20px; background: var(--accent-color); border-radius: 50%; border: 4px solid white; box-shadow: var(--shadow-sm);"></div>
+                <h3 style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 0.5rem;">Today</h3>
+                <p style="color: var(--text-muted);">A trusted global partner with a diverse portfolio, serving over 500+ satisfied corporate clients worldwide.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section class="section" style="background-color: var(--bg-light);">
+    <div class="container">
+        <h2 style="text-align: center; margin-bottom: 1rem;">Meet Leadership</h2>
+        <p style="text-align: center; color: var(--text-muted); max-width: 600px; margin: 0 auto 3rem;">Driven by expertise and passion.</p>
+        
+        <div class="grid grid-3">
+            <div class="card" style="text-align: center; overflow: hidden;" data-aos="fade-up">
+                 <div style="height: 250px; background: #cbd5e1; display: flex; align-items: end; justify-content: center;">
+                     <i class="fas fa-user-tie" style="font-size: 8rem; color: white; opacity: 0.5; margin-bottom: -1rem;"></i>
+                 </div>
+                 <div class="card-body">
+                     <h3 style="font-size: 1.25rem;">Mr. Nasim</h3>
+                     <span style="display: block; color: var(--accent-color); font-size: 0.9rem; margin-bottom: 1rem;">Founder & CEO</span>
+                 </div>
+            </div>
+            
+            <div class="card" style="text-align: center; overflow: hidden;" data-aos="fade-up" data-aos-delay="100">
+                 <div style="height: 250px; background: #cbd5e1; display: flex; align-items: end; justify-content: center;">
+                     <i class="fas fa-user-tie" style="font-size: 8rem; color: white; opacity: 0.5; margin-bottom: -1rem;"></i>
+                 </div>
+                 <div class="card-body">
+                     <h3 style="font-size: 1.25rem;">Ahmed Nasim</h3>
+                     <span style="display: block; color: var(--accent-color); font-size: 0.9rem; margin-bottom: 1rem;">Managing Director</span>
+                 </div>
+            </div>
+
+            <div class="card" style="text-align: center; overflow: hidden;" data-aos="fade-up" data-aos-delay="200">
+                 <div style="height: 250px; background: #cbd5e1; display: flex; align-items: end; justify-content: center;">
+                     <i class="fas fa-user-tie" style="font-size: 8rem; color: white; opacity: 0.5; margin-bottom: -1rem;"></i>
+                 </div>
+                 <div class="card-body">
+                     <h3 style="font-size: 1.25rem;">Sarah Khan</h3>
+                     <span style="display: block; color: var(--accent-color); font-size: 0.9rem; margin-bottom: 1rem;">Head of Operations</span>
+                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Certifications Bar -->
+<section style="background: var(--primary-dark); padding: 3rem 0; text-align: center; color: rgba(255,255,255,0.6);">
+    <div class="container">
+        <h4 style="margin-bottom: 2rem; color: white; opacity: 0.8; font-weight: 400; text-transform: uppercase; letter-spacing: 2px;">Our Certifications</h4>
+        <div style="display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap;">
+             <span style="font-size: 1.5rem; font-weight: 700; border: 2px solid rgba(255,255,255,0.3); padding: 0.5rem 1rem; border-radius: 4px;">ISO 9001:2015</span>
+             <span style="font-size: 1.5rem; font-weight: 700; border: 2px solid rgba(255,255,255,0.3); padding: 0.5rem 1rem; border-radius: 4px;">ISO 14001</span>
+             <span style="font-size: 1.5rem; font-weight: 700; border: 2px solid rgba(255,255,255,0.3); padding: 0.5rem 1rem; border-radius: 4px;">OHSAS 18001</span>
+        </div>
+    </div>
+</section>
 {% endblock %}

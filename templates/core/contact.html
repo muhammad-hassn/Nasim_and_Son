@@ -1,51 +1,104 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Contact Us | {{ company_name }}{% endblock %}
 
 {% block content %}
-<div class="container" style="padding: 60px 20px;">
-    <h1>Contact Us</h1>
-    <div class="grid" style="grid-template-columns: 1fr 1fr;">
-        <div class="contact-info">
-            <h3>Head Office</h3>
-            <p>123 Industrial Estate, Karachi, Pakistan</p>
-            <p><strong>Phone:</strong> +92 300 1234567</p>
-            <p><strong>Email:</strong> info@nasimandsons.com</p>
-            
-            <h3 style="margin-top: 30px;">Global Offices</h3>
-            <ul>
-                <li>UAE: Dubai Industrial City</li>
-                <li>China: Shanghai Trading Hub</li>
-            </ul>
-        </div>
-        
-        <div class="contact-form">
-            <h2>Send us a Message</h2>
-            <form method="post">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label>Name</label>
-                    <input type="text" name="name" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" name="email" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label>Phone</label>
-                    <input type="tel" name="phone" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Subject</label>
-                    <input type="text" name="subject" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label>Message</label>
-                    <textarea name="message" class="form-control" rows="5" required></textarea>
-                </div>
-                <button type="submit" class="btn">Send Message</button>
-            </form>
+<!-- Page Header -->
+<section style="background: linear-gradient(rgba(26, 54, 93, 0.9), rgba(26, 54, 93, 0.9)), url('https://www.transparenttextures.com/patterns/dark-matter.png'); color: var(--white); padding: 5rem 0 7rem; text-align: center;">
+    <div class="container" data-aos="fade-in">
+        <h1 style="margin-bottom: 1rem; font-size: 3rem; font-weight: 800;">Get in Touch</h1>
+        <p style="font-size: 1.25rem; opacity: 0.9; max-width: 600px; margin: 0 auto;">
+            We're here to assist you. Reach out for quotes, inquiries, or collaboration opportunities.
+        </p>
+    </div>
+</section>
+
+<section class="section" style="background-color: var(--bg-body); padding-bottom: 0;">
+    <div class="container" style="position: relative; top: -50px; z-index: 2;">
+        <div class="grid grid-3">
+             <!-- Info Card 1 -->
+             <div class="card" style="text-align: center; padding: 2rem; box-shadow: var(--shadow-lg);" data-aos="fade-up" data-aos-delay="0">
+                 <div style="width: 60px; height: 60px; background: rgba(59, 130, 246, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: var(--accent-color); font-size: 1.5rem;">
+                     <i class="fas fa-map-marker-alt"></i>
+                 </div>
+                 <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Headquarters</h3>
+                 <p style="color: var(--text-muted);">Industrial Estate, Karachi<br>Pakistan</p>
+             </div>
+             
+             <!-- Info Card 2 -->
+             <div class="card" style="text-align: center; padding: 2rem; box-shadow: var(--shadow-lg);" data-aos="fade-up" data-aos-delay="100">
+                 <div style="width: 60px; height: 60px; background: rgba(59, 130, 246, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: var(--accent-color); font-size: 1.5rem;">
+                     <i class="fas fa-envelope"></i>
+                 </div>
+                 <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Email Us</h3>
+                 <p style="color: var(--text-muted);">
+                     <a href="mailto:info@{{ meta_site_domain }}" style="color: inherit;">info@{{ meta_site_domain }}</a><br>
+                     <a href="mailto:sales@{{ meta_site_domain }}" style="color: inherit;">sales@{{ meta_site_domain }}</a>
+                 </p>
+             </div>
+             
+             <!-- Info Card 3 -->
+             <div class="card" style="text-align: center; padding: 2rem; box-shadow: var(--shadow-lg);" data-aos="fade-up" data-aos-delay="200">
+                 <div style="width: 60px; height: 60px; background: rgba(59, 130, 246, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: var(--accent-color); font-size: 1.5rem;">
+                     <i class="fas fa-phone"></i>
+                 </div>
+                 <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Call Us</h3>
+                 <p style="color: var(--text-muted);">+92 300 1234567<br>Mon-Fri, 9am - 6pm</p>
+             </div>
         </div>
     </div>
-</div>
+</section>
+
+<section class="section" style="padding-top: 2rem;">
+    <div class="container">
+        <div class="grid grid-2" style="gap: 4rem; align-items: start;">
+            <!-- Form -->
+            <div data-aos="fade-right">
+                <h2 style="margin-bottom: 1.5rem;">Send a Request</h2>
+                <div class="card" style="border: none; background: var(--bg-white); box-shadow: var(--shadow-md);">
+                    <div class="card-body">
+                         <form method="post">
+                            {% csrf_token %}
+                            <div class="grid grid-2" style="gap: 1.5rem; margin-bottom: 1.5rem;">
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label class="form-label">Your Name</label>
+                                    <input type="text" name="name" class="form-control" placeholder="John Doe" required>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label class="form-label">Phone</label>
+                                    <input type="tel" name="phone" class="form-control" placeholder="+92..." required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" name="email" class="form-control" placeholder="john@company.com" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Subject</label>
+                                <input type="text" name="subject" class="form-control" placeholder="Product Inquiry / Partnership" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Message</label>
+                                <textarea name="message" class="form-control" rows="5" placeholder="Tell us about your requirements..." required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-block" style="padding: 1rem;">
+                                <i class="fas fa-paper-plane" style="margin-right: 8px;"></i> Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Map (Styled) -->
+            <div style="height: 100%; min-height: 500px; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); position: relative;" data-aos="fade-left">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d924237.7097720311!2d66.59495079896683!3d25.19298365069302!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33e06651dff19%3A0x6522844d36637517!2sKarachi%2C%20Karachi%20City%2C%20Sindh!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s" width="100%" height="100%" style="border:0; position: absolute; top: 0; left: 0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

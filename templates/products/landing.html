@@ -1,29 +1,75 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}All Products | {{ company_name }}{% endblock %}
+{% block title %}Our Products | {{ company_name }}{% endblock %}
 
 {% block content %}
-<div class="container" style="padding: 60px 20px;">
-    <h1 style="text-align: center; margin-bottom: 40px;">Our Product Categories</h1>
-    
-    <div class="grid">
-        {% for category in categories %}
-        <div class="card">
-            {% if category.image %}
-            <img src="{{ category.image.url }}" alt="{{ category.name }}">
-            {% else %}
-            <img src="{% static 'images/placeholder.jpg' %}" alt="{{ category.name }}">
-            {% endif %}
-            <div class="card-body">
-                <h3 class="card-title">{{ category.name }}</h3>
-                <p>{{ category.description|truncatewords:15 }}</p>
-                <a href="{{ category.get_absolute_url }}" class="btn">View Products</a>
-            </div>
-        </div>
-        {% empty %}
-        <p>No categories found. Please add them in the admin panel.</p>
-        {% endfor %}
+<!-- Page Header with Parallax/Gradient -->
+<section style="background: linear-gradient(rgba(26, 54, 93, 0.9), rgba(26, 54, 93, 0.8)), url('https://www.transparenttextures.com/patterns/carbon-fibre.png'); padding: 5rem 0; color: var(--white); text-align: center; position: relative; overflow: hidden;">
+    <div class="container" style="position: relative; z-index: 2;" data-aos="fade-up">
+        <span style="display: inline-block; padding: 0.5rem 1rem; background: rgba(59, 130, 246, 0.1); color: var(--accent-color); border-radius: 50px; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem; border: 1px solid rgba(59,130,246,0.2);">
+            INDUSTRIAL SOLUTIONS
+        </span>
+        <h1 style="font-size: 3.5rem; color: var(--white); margin-bottom: 1.5rem; font-weight: 700;">Our Products</h1>
+        <p style="font-size: 1.25rem; opacity: 0.9; max-width: 700px; margin: 0 auto; line-height: 1.6;">
+            Explore our comprehensive range of high-performance chemicals designed to optimize your industrial processes.
+        </p>
     </div>
-</div>
+</section>
+
+<!-- Categories Grid -->
+<section class="section" style="background-color: var(--bg-body);">
+    <div class="container">
+        <!-- Optional Filter/Search Bar Placeholder -->
+        <div style="margin-bottom: 3rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;" data-aos="fade-up" data-aos-delay="100">
+            <span style="color: var(--text-muted);">Showing all categories</span>
+            <!-- Search input could go here -->
+        </div>
+
+        <div class="grid grid-3">
+            {% for category in categories %}
+            <div class="card" style="box-shadow: var(--shadow-md); border: none; overflow: hidden; background: var(--bg-white);" data-aos="fade-up" data-aos-delay="100">
+                <div style="height: 240px; position: relative; overflow: hidden;">
+                    {% if category.image %}
+                    <img src="{{ category.image.url }}" alt="{{ category.name }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+                    {% else %}
+                    <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #e2e8f0;">
+                         <i class="fas fa-flask" style="font-size: 4rem; color: #cbd5e1;"></i>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Overlay on Hover -->
+                    <div class="overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.7); opacity: 0; transition: 0.4s; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; text-align: center;">
+                        <a href="{{ category.get_absolute_url }}" class="btn btn-outline" style="border-color: white; color: white;">Explore Category</a>
+                    </div>
+                </div>
+                
+                <div class="card-body" style="padding: 2rem;">
+                    <h3 class="card-title" style="font-size: 1.4rem; font-weight: 700;">{{ category.name }}</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
+                        {{ category.description|truncatewords:15 }}
+                    </p>
+                    <a href="{{ category.get_absolute_url }}" style="color: var(--accent-color); font-weight: 600; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+                        View Products <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <div style="grid-column: 1 / -1; text-align: center; padding: 5rem 0;">
+                <i class="fas fa-search" style="font-size: 4rem; color: var(--border-color); margin-bottom: 1.5rem;"></i>
+                <p style="color: var(--text-muted); font-size: 1.2rem;">No categories found.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<style>
+    .card:hover img {
+        transform: scale(1.1);
+    }
+    .card:hover .overlay {
+        opacity: 1;
+    }
+</style>
 {% endblock %}

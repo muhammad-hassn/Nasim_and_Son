@@ -10,6 +10,25 @@ def add_to_quote(request, product_id):
     messages.success(request, "Product added to quote list.")
     return redirect('inquiries:quote_list')
 
+def update_quote(request, product_id, action):
+    cart = QuoteCart(request)
+    item = cart.cart.get(str(product_id))
+    
+    if item:
+        current_qty = item['quantity']
+        if action == 'increase':
+            cart.update(product_id, current_qty + 1)
+        elif action == 'decrease':
+            cart.update(product_id, current_qty - 1)
+            
+    return redirect('inquiries:quote_list')
+
+def remove_from_quote(request, product_id):
+    cart = QuoteCart(request)
+    cart.remove(product_id)
+    messages.success(request, "Item removed from quote.")
+    return redirect('inquiries:quote_list')
+
 def quote_list(request):
     cart = QuoteCart(request)
     if request.method == 'POST':

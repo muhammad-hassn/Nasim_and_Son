@@ -6,37 +6,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{{ company_name }}{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}Leading chemical solutions provider.{% endblock %}">
+    
+    <!-- Google Fonts: Montserrat (Heading) & Open Sans (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     {% block extra_head %}{% endblock %}
 </head>
-<body>
-    <header>
+<body class="d-flex flex-column min-vh-100">
+    <!-- Header / Navbar -->
+    <header id="main-header">
         <div class="container">
             <nav>
                 <div class="logo">
-                    <a href="{% url 'core:home' %}">{{ company_name }}</a>
+                    <a href="{% url 'core:home' %}">
+                        <i class="fas fa-atom" style="color: var(--accent-color);"></i> {{ company_name }}
+                    </a>
                 </div>
+                
                 <ul class="nav-links">
                     <li><a href="{% url 'core:home' %}">Home</a></li>
                     <li><a href="{% url 'core:company' %}">Company</a></li>
                     <li><a href="{% url 'products:landing' %}">Products</a></li>
-                    <li><a href="{% url 'blog:list' %}">Blog</a></li>
-                    <li><a href="{% url 'core:contact' %}">Contact Us</a></li>
-                    <li><a href="{% url 'inquiries:quote_list' %}" class="btn-outline">Quote Request ({% if cart_count %}{{ cart_count }}{% else %}0{% endif %})</a></li>
+                    <li><a href="{% url 'blog:list' %}">Insights</a></li>
+                    <li><a href="{% url 'core:contact' %}">Contact</a></li>
+                    <li>
+                        <a href="{% url 'inquiries:quote_list' %}" class="btn btn-outline" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">
+                            <i class="fas fa-file-contract" style="margin-right: 8px;"></i> Quote ({% if cart_count %}{{ cart_count }}{% else %}0{% endif %})
+                        </a>
+                    </li>
                 </ul>
+
                 <div class="mobile-menu-toggle">
-                    <!-- Hamburger Icon -->
-                    <span></span><span></span><span></span>
+                    <i class="fas fa-bars"></i>
                 </div>
             </nav>
         </div>
     </header>
 
+    <!-- Main Content -->
     <main>
         {% if messages %}
-        <div class="container" style="margin-top: 20px;">
+        <div class="container" style="margin-top: 100px;">
             {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            <div class="alert alert-{{ message.tags }}" data-aos="fade-down">
+                <i class="fas fa-info-circle"></i> {{ message }}
+            </div>
             {% endfor %}
         </div>
         {% endif %}
@@ -44,33 +67,84 @@
         {% block content %}{% endblock %}
     </main>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
+            <div class="grid grid-3">
+                <div class="footer-widget">
                     <h3>About Us</h3>
-                    <p>{{ company_name }} is a premier supplier of industrial chemicals, serving global markets with quality and reliability.</p>
+                    <p style="margin-bottom: 1.5rem; opacity: 0.8;">{{ company_name }} is a global leader in high-performance industrial chemicals, dedicated to innovation, sustainability, and quality service.</p>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="#" style="color: var(--white); font-size: 1.2rem;"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" style="color: var(--white); font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: var(--white); font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
+                    </div>
                 </div>
-                <div class="footer-col">
+                
+                <div class="footer-widget">
                     <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="{% url 'core:home' %}">Home</a></li>
-                        <li><a href="{% url 'products:landing' %}">Products</a></li>
-                        <li><a href="{% url 'blog:list' %}">Blog</a></li>
-                        <li><a href="{% url 'core:contact' %}">Contact</a></li>
+                    <ul class="footer-links">
+                        <li><a href="{% url 'core:home' %}">Home Page</a></li>
+                        <li><a href="{% url 'products:landing' %}">Our Products</a></li>
+                        <li><a href="{% url 'core:company' %}">Company Profile</a></li>
+                        <li><a href="{% url 'blog:list' %}">Industry Insights</a></li>
+                        <li><a href="{% url 'core:contact' %}">Get in Touch</a></li>
                     </ul>
                 </div>
-                <div class="footer-col">
-                    <h3>Contact Info</h3>
-                    <p>Email: info@{{ meta_site_domain }}</p>
-                    <p>Phone: +92 300 1234567</p>
-                    <p>Address: Industrial Area, Karachi, Pakistan</p>
+                
+                <div class="footer-widget">
+                    <h3>Global HQ</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt" style="width: 20px; color: var(--accent-color);"></i> Industrial Estate, Karachi, PK</li>
+                        <li><i class="fas fa-envelope" style="width: 20px; color: var(--accent-color);"></i> info@{{ meta_site_domain }}</li>
+                        <li><i class="fas fa-phone" style="width: 20px; color: var(--accent-color);"></i> +92 300 1234567</li>
+                        <li><i class="fas fa-clock" style="width: 20px; color: var(--accent-color);"></i> Mon - Sat: 9:00 - 18:00</li>
+                    </ul>
                 </div>
             </div>
-            <div class="copyright">
-                &copy; {% now "Y" %} {{ company_name }}. All Rights Reserved.
+            
+            <div class="footer-bottom">
+                <p>&copy; {% now "Y" %} {{ company_name }}. Designed for Excellence.</p>
             </div>
         </div>
     </footer>
+
+    <!-- AOS Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Init AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100,
+            easing: 'ease-out-cubic'
+        });
+
+        // Sticky Header Logic
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const toggleBtn = document.querySelector('.mobile-menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        toggleBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = toggleBtn.querySelector('i');
+            if(navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    </script>
 </body>
 </html>

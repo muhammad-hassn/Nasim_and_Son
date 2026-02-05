@@ -1,51 +1,113 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}{{ product.meta_title|default:product.name }} | {{ company_name }}{% endblock %}
 {% block meta_description %}{{ product.meta_description|default:product.short_description }}{% endblock %}
 
 {% block content %}
-<div class="container" style="padding: 60px 20px;">
-    <div class="grid" style="grid-template-columns: 1fr 1fr;">
-        <div class="product-image">
-            <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 100%; border-radius: 8px;">
-        </div>
-        <div class="product-info">
-            <h1>{{ product.name }}</h1>
-            <p class="category" style="color: #666; margin-bottom: 20px;">Category: <a href="{{ product.category.get_absolute_url }}">{{ product.category.name }}</a></p>
+<!-- Breadcrumb Section -->
+<div style="background: var(--bg-body); padding: 1.5rem 0; border-bottom: 1px solid var(--border-color);">
+    <div class="container">
+        <a href="{% url 'products:landing' %}" style="color: var(--text-muted); font-size: 0.9rem;">Products</a>
+        <span style="margin: 0 0.5rem; color: var(--border-color);">/</span>
+        <a href="{{ product.category.get_absolute_url }}" style="color: var(--text-muted); font-size: 0.9rem;">{{ product.category.name }}</a>
+        <span style="margin: 0 0.5rem; color: var(--border-color);">/</span>
+        <span style="color: var(--text-main); font-weight: 500; font-size: 0.9rem;">{{ product.name }}</span>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container">
+        <div class="product-layout" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;">
             
-            <div class="description" style="margin-bottom: 30px;">
-                {{ product.full_description|linebreaks }}
+            <!-- LEFT: Image Gallery (Sticky) -->
+            <div style="position: sticky; top: 100px;">
+                <div class="card" style="border: none; box-shadow: var(--shadow-lg); overflow: hidden; background: white; padding: 2rem; display: flex; align-items: center; justify-content: center; min-height: 400px;" data-aos="fade-right">
+                    {% if product.image %}
+                    <img id="main-product-image" src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 100%; height: auto; object-fit: contain;">
+                    {% else %}
+                    <i class="fas fa-cube" style="font-size: 8rem; color: var(--border-color); opacity: 0.5;"></i>
+                    {% endif %}
+                </div>
+                <!-- Thumbnails could go here if multiple images existed -->
             </div>
+            
+            <!-- RIGHT: Product Info -->
+            <div class="product-info" data-aos="fade-left">
+                <span style="display: inline-block; padding: 0.5rem 1rem; background: rgba(59, 130, 246, 0.1); color: var(--accent-color); border-radius: 4px; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem; text-transform: uppercase;">
+                    {{ product.category.name }}
+                </span>
+                
+                <h1 style="font-size: 2.5rem; margin-bottom: 1rem; line-height: 1.2;">{{ product.name }}</h1>
+                
+                <div style="font-size: 1.1rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 2.5rem;">
+                    {{ product.short_description }}
+                </div>
+                
+                <!-- Action Card -->
+                <div class="card" style="background: var(--bg-body); border: 1px solid var(--border-color); padding: 1.5rem; margin-bottom: 2.5rem;">
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <a href="{% url 'inquiries:add_to_quote' product.id %}" class="btn btn-primary" style="flex: 1; padding: 1rem;">
+                            <i class="fas fa-file-invoice-dollar" style="margin-right: 8px;"></i> Request Quote
+                        </a>
+                        <a href="{% url 'core:contact' %}" class="btn btn-outline btn-dark-outline" style="flex: 1; padding: 1rem;">
+                            <i class="fas fa-question-circle" style="margin-right: 8px;"></i> Ask Question
+                        </a>
+                    </div>
+                    <div style="margin-top: 1rem; display: flex; align-items: center; justify-content: center; gap: 1.5rem; font-size: 0.9rem; color: var(--text-muted);">
+                        <span><i class="fas fa-check-circle" style="color: var(--accent-color);"></i> Bulk Available</span>
+                        <span><i class="fas fa-truck" style="color: var(--accent-color);"></i> Global Shipping</span>
+                    </div>
+                </div>
 
-            {% if product.applications %}
-            <h3>Applications</h3>
-            <div class="applications" style="margin-bottom: 20px;">
-                {{ product.applications|linebreaks }}
-            </div>
-            {% endif %}
-
-            <div class="actions">
-                <a href="{% url 'inquiries:add_to_quote' product.id %}" class="btn">Request Quote / Inquiry</a>
+                <!-- Tabs / Details -->
+                <div style="border-bottom: 1px solid var(--border-color); margin-bottom: 1.5rem;">
+                    <button class="tab-btn active" style="background: none; border: none; padding: 1rem 0; margin-right: 2rem; border-bottom: 2px solid var(--accent-color); font-weight: 600; color: var(--primary-color); cursor: pointer;">Description</button>
+                    {% if product.applications %}
+                    <button class="tab-btn" style="background: none; border: none; padding: 1rem 0; border-bottom: 2px solid transparent; color: var(--text-muted); cursor: pointer;">Applications</button>
+                    {% endif %}
+                </div>
+                
+                <div class="tab-content" style="color: var(--text-main); line-height: 1.8;">
+                    {{ product.full_description|linebreaks }}
+                </div>
             </div>
         </div>
     </div>
-
+    
     <!-- Related Products -->
     {% if related_products %}
-    <div class="related-products" style="margin-top: 60px;">
-        <h2>Related Products</h2>
-        <div class="grid">
+    <div class="container" style="margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--border-color);">
+        <h2 style="margin-bottom: 2rem;">You Might Also Like</h2>
+        <div class="grid grid-4">
             {% for related in related_products %}
             <div class="card">
-                <img src="{{ related.image.url }}" alt="{{ related.name }}">
-                <div class="card-body">
-                    <h3 class="card-title">{{ related.name }}</h3>
-                    <a href="{{ related.get_absolute_url }}" class="btn">View Details</a>
+                <div style="height: 180px; padding: 1rem; display: flex; align-items: center; justify-content: center; background: white;">
+                    {% if related.image %}
+                    <img src="{{ related.image.url }}" alt="{{ related.name }}" style="max-height: 100%; max-width: 100%;">
+                    {% else %}
+                    <i class="fas fa-box" style="color: #cbd5e1; font-size: 3rem;"></i>
+                    {% endif %}
+                </div>
+                <div class="card-body" style="padding: 1rem;">
+                    <h4 style="font-size: 1rem; margin-bottom: 0.5rem;"><a href="{{ related.get_absolute_url }}" style="color: var(--text-main);">{{ related.name }}</a></h4>
+                    <a href="{{ related.get_absolute_url }}" style="font-size: 0.85rem; font-weight: 600;">View &rarr;</a>
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
     {% endif %}
-</div>
+
+    <style>
+        @media (max-width: 900px) {
+            .product-layout {
+                grid-template-columns: 1fr !important;
+            }
+            .product-layout > div:first-child {
+                position: static !important;
+            }
+        }
+    </style>
+</section>
 {% endblock %}

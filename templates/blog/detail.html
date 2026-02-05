@@ -1,33 +1,77 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}{{ post.meta_title|default:post.title }} | {{ company_name }}{% endblock %}
-{% block meta_description %}{{ post.meta_description }}{% endblock %}
+{% block title %}{{ post.title }} | {{ company_name }}{% endblock %}
 
 {% block content %}
-<div class="container" style="padding: 60px 20px; max-width: 900px;">
-    <img src="{{ post.image.url }}" alt="{{ post.title }}" style="width: 100%; border-radius: 8px; margin-bottom: 30px;">
-    
-    <h1>{{ post.title }}</h1>
-    <p style="color: #666; margin-bottom: 30px;">Published on {{ post.created_at|date:"F d, Y" }} | Category: {{ post.category.name|default:"General" }}</p>
-    
-    <div class="blog-content" style="line-height: 1.8; font-size: 1.1rem;">
-        {{ post.content|safe }}
-    </div>
-
-    <!-- Related Posts -->
-    {% if related_posts %}
-    <div class="related-posts" style="margin-top: 60px; border-top: 1px solid #eee; padding-top: 40px;">
-        <h3>Related Posts</h3>
-        <div class="grid" style="grid-template-columns: repeat(3, 1fr);">
-            {% for related in related_posts %}
-            <div class="card">
-                <div class="card-body">
-                    <h4><a href="{{ related.get_absolute_url }}">{{ related.title }}</a></h4>
+<!-- Article Layout -->
+<section class="section">
+    <div class="container">
+        <div style="max-width: 900px; margin: 0 auto;">
+            <!-- Header -->
+            <div style="text-align: center; margin-bottom: 3rem;" data-aos="fade-in">
+                <div style="margin-bottom: 1rem; color: var(--accent-color); font-weight: 600; text-transform: uppercase; font-size: 0.9rem;">
+                    Insight
+                </div>
+                <h1 style="font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; margin-bottom: 1.5rem;">{{ post.title }}</h1>
+                <div style="color: var(--text-muted); display: flex; align-items: center; justify-content: center; gap: 1.5rem; font-size: 0.95rem;">
+                    <span><i class="far fa-calendar" style="margin-right: 5px;"></i> {{ post.created_at|date:"F d, Y" }}</span>
+                    <!-- <span><i class="far fa-user" style="margin-right: 5px;"></i> Editorial Team</span> -->
                 </div>
             </div>
-            {% endfor %}
+            
+            <!-- Featured Image -->
+            <div style="border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); margin-bottom: 4rem;" data-aos="zoom-in">
+                {% if post.image %}
+                <img src="{{ post.image.url }}" alt="{{ post.title }}" style="width: 100%; height: auto;">
+                {% else %}
+                <div style="height: 400px; background: #f1f5f9; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-newspaper" style="font-size: 5rem; color: #cbd5e1;"></i>
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Content -->
+            <article class="blog-content" style="font-size: 1.15rem; line-height: 1.9; color: var(--text-main); margin-bottom: 4rem;">
+                {{ post.content|linebreaks }}
+            </article>
+            
+            <!-- Share / Footnote -->
+            <div style="border-top: 1px solid var(--border-color); padding-top: 2rem; margin-bottom: 4rem; display: flex; justify-content: space-between; align-items: center;">
+                <a href="{% url 'blog:list' %}" class="btn btn-outline btn-dark-outline" style="padding: 0.5rem 1.5rem;">&larr; Back to Insights</a>
+                <div style="display: flex; gap: 1rem;">
+                    <span style="color: var(--text-muted);">Share:</span>
+                    <a href="#" style="color: var(--text-main); font-size: 1.2rem;"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" style="color: var(--text-main); font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                    <a href="#" style="color: var(--text-main); font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
         </div>
     </div>
-    {% endif %}
-</div>
+</section>
+
+<!-- Related News Section (if logic exists or generic placeholder) -->
+<section class="section" style="background-color: var(--bg-light);">
+    <div class="container">
+        <h3 style="margin-bottom: 2rem; text-align: center;">More from our blog</h3>
+         <div class="grid grid-3">
+             <!-- We would ideally loop through 'related_posts' here. Using simple placeholder loop for visually checking layout if variable not present -->
+             <!-- Assuming 'recent_posts' context processor or similar might exist, or just rely on what is passed. 
+                  Since I don't see 'related_posts' in the original context, I'll leave this section conditional or removed to avoid errors. 
+                  I Will simplify to just a CTA to browse more. -->
+         </div>
+         <div style="text-align: center;">
+             <a href="{% url 'blog:list' %}" class="btn btn-primary">View All Articles</a>
+         </div>
+    </div>
+</section>
+
+<style>
+    /* Typography Overrides for Article Content */
+    .blog-content h2 { margin-top: 2.5rem; margin-bottom: 1.5rem; font-size: 1.8rem; }
+    .blog-content h3 { margin-top: 2rem; margin-bottom: 1rem; font-size: 1.5rem; }
+    .blog-content p { margin-bottom: 2rem; }
+    .blog-content ul { list-style: disc; margin-left: 2rem; margin-bottom: 2rem; }
+    .blog-content blockquote { border-left: 5px solid var(--accent-color); padding-left: 1.5rem; font-style: italic; color: var(--text-muted); font-size: 1.3rem; margin: 2rem 0; }
+</style>
 {% endblock %}

@@ -16,6 +16,15 @@ class QuoteCart:
             self.cart[product_id]['quantity'] += 1
         self.save()
 
+    def update(self, product_id, quantity):
+        product_id = str(product_id)
+        if product_id in self.cart:
+            if quantity > 0:
+                self.cart[product_id]['quantity'] = int(quantity)
+            else:
+                self.remove(product_id)
+            self.save()
+
     def remove(self, product_id):
         product_id = str(product_id)
         if product_id in self.cart:
