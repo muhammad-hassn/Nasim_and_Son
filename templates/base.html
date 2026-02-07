@@ -187,21 +187,38 @@
         }
 
         /* Mobile Menu */
-        .mobile-toggle { display: none; font-size: 1.5rem; color: var(--primary); cursor: pointer; }
+        .mobile-toggle { display: none; font-size: 1.5rem; color: var(--primary); cursor: pointer; z-index: 1002; }
         
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(10, 37, 64, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        .nav-overlay.active { opacity: 1; visibility: visible; }
+
         @media (max-width: 992px) {
             .nav-links {
                 position: fixed;
                 top: 0;
                 right: -100%;
                 width: 80%;
-                max-width: 400px;
+                max-width: 320px;
                 height: 100vh;
                 background: var(--bg-white);
                 flex-direction: column;
-                justify-content: center;
+                justify-content: flex-start;
+                padding-top: 100px;
+                gap: 2rem;
                 box-shadow: var(--shadow-lg);
-                transition: 0.4s ease-in-out;
+                transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
                 z-index: 1001;
             }
             .nav-links.active { right: 0; }
@@ -408,6 +425,8 @@
         </div>
     </footer>
 
+    <div class="nav-overlay" id="navOverlay"></div>
+
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
@@ -432,12 +451,19 @@
         // Mobile Menu
         const toggle = document.getElementById('mobileToggle');
         const nav = document.getElementById('navLinks');
-        toggle.addEventListener('click', () => {
+        const overlay = document.getElementById('navOverlay');
+
+        function toggleMenu() {
             nav.classList.toggle('active');
+            overlay.classList.toggle('active');
             const icon = toggle.querySelector('i');
             icon.classList.toggle('fa-bars');
             icon.classList.toggle('fa-times');
-        });
+            document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+        }
+
+        toggle.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
 
         // Auto Close Alerts
         setTimeout(() => {

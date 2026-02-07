@@ -18,11 +18,12 @@
 
 <section class="section">
     <div class="container">
-        <div class="grid" style="grid-template-columns: 280px 1fr; gap: 4rem;">
+        <!-- Main Layout Grid -->
+        <div class="category-layout">
             
             <!-- Sidebar -->
-            <aside style="display: block;">
-                <div style="position: sticky; top: 120px;">
+            <aside class="category-sidebar">
+                <div class="sidebar-sticky">
                     <div style="background: var(--primary); color: white; padding: 1.25rem 2rem; border-radius: var(--radius-sm) var(--radius-sm) 0 0; font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;">
                         Categories
                     </div>
@@ -45,7 +46,7 @@
                         </ul>
                     </div>
                     
-                    <div class="card" style="margin-top: 2rem; padding: 2rem; background: linear-gradient(135deg, var(--primary) 0%, #163a5f 100%); color: white; border: none;">
+                    <div class="card hide-mobile" style="margin-top: 2rem; padding: 2rem; background: linear-gradient(135deg, var(--primary) 0%, #163a5f 100%); color: white; border: none;">
                         <h4 style="color: white; margin-bottom: 1rem;">Need Help?</h4>
                         <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 1.5rem;">Speak with our industrial chemical experts for technical guidance.</p>
                         <a href="{% url 'core:contact' %}" class="btn btn-accent" style="width: 100%; font-size: 0.75rem; padding: 0.7rem;">Talk to Expert</a>
@@ -53,16 +54,16 @@
                 </div>
             </aside>
 
-            <!-- Main Listing -->
-            <div>
+            <!-- Main Content Area -->
+            <main class="category-main">
                 {% if category.description %}
-                <div class="card" style="padding: 2.5rem; margin-bottom: 3rem; background: var(--bg-white); border-left: 4px solid var(--accent);" data-aos="fade-up">
-                    <h3 style="margin-bottom: 1rem; font-size: 1.2rem;">About {{ category.name }}</h3>
-                    <p style="color: var(--text-muted); line-height: 1.8;">{{ category.description }}</p>
+                <div class="card" style="padding: 2rem; margin-bottom: 2rem; background: var(--bg-white); border-left: 4px solid var(--accent);" data-aos="fade-up">
+                    <h3 style="margin-bottom: 0.5rem; font-size: 1.2rem;">About {{ category.name }}</h3>
+                    <p style="color: var(--text-muted); line-height: 1.6; font-size: 0.95rem;">{{ category.description }}</p>
                 </div>
                 {% endif %}
 
-                <div class="grid grid-3">
+                <div class="product-grid">
                     {% for product in products %}
                     <div class="card" style="display: flex; flex-direction: column;" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
                         <!-- Product Image -->
@@ -102,11 +103,57 @@
                         <a href="{% url 'products:landing' %}" class="btn btn-primary" style="margin-top: 2rem;">Back to Catalog</a>
                     </div>
                     {% endfor %}
-                </div>
-            </div>
-
-        </div>
+                </div> <!-- End product-grid -->
+            </main>
+        </div> <!-- End category-layout -->
     </div>
 </section>
 
+<style>
+    /* Responsive Layout Logic */
+    .category-layout {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        gap: 3rem;
+    }
+
+    .sidebar-sticky {
+        position: sticky;
+        top: 100px;
+    }
+
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+
+    /* Tablet adjustments */
+    @media (max-width: 1200px) {
+        .category-layout { gap: 2rem; }
+        .product-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 992px) {
+        .category-layout {
+            grid-template-columns: 1fr;
+        }
+        .sidebar-sticky {
+            position: relative;
+            top: 0;
+            margin-bottom: 2rem;
+        }
+        .hide-mobile { display: none; }
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 576px) {
+        .product-grid {
+            grid-template-columns: 1fr;
+        }
+        .category-main {
+            padding: 0;
+        }
+    }
+</style>
 {% endblock %}

@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-change-me-for-production-nasim-and-sons'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['hassanprojects.pythonanywhere.com']
+ALLOWED_HOSTS = ['hassanprojects.pythonanywhere.com', '127.0.0.1', 'localhost']
 
 # Application definition
 
