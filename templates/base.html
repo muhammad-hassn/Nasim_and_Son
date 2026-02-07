@@ -56,13 +56,13 @@
         ul { list-style: none; }
         img { max-width: 100%; height: auto; display: block; }
         .container { 
-            width: 90%; 
+            width: 100%; 
             max-width: 1200px; 
             margin: 0 auto; 
-            padding: 0 15px; /* Added internal safety padding */
+            padding: 0 30px; /* More padding to bring things inside */
         }
         @media (max-width: 576px) {
-            .container { width: 92%; padding: 0 10px; }
+            .container { padding: 0 20px; }
         }
         .section { padding: 80px 0; }
 
@@ -125,11 +125,11 @@
             width: 100%;
             z-index: 2000;
             background: var(--bg-white);
-            border-bottom: 1px solid var(--border);
-            height: 70px; /* Stay at final height immediately */
+            border-bottom: 2px solid var(--primary); /* Darker border like in the image */
+            height: 75px; 
             display: flex;
             align-items: center;
-            box-shadow: var(--shadow-md); /* Permanent shadow for visibility */
+            box-shadow: var(--shadow-sm); 
         }
         .navbar {
             display: flex;
@@ -238,7 +238,8 @@
                 visibility: visible !important; 
                 align-items: center;
                 justify-content: center;
-                margin-right: -5px; /* Bring it slightly inward if container padding is high */
+                font-size: 1.8rem; /* Slightly larger like the image */
+                color: var(--primary); /* Dark color like the image */
             }
         }
 

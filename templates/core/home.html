@@ -5,28 +5,101 @@
 
 {% block content %}
 <!-- Hero Section -->
-<section style="position: relative; height: 90vh; min-height: 700px; background: linear-gradient(rgba(10, 37, 64, 0.8), rgba(10, 37, 64, 0.7)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=2000&q=80'); background-size: cover; background-position: center; display: flex; align-items: center; color: white;">
-    <div class="container" style="z-index: 2;">
-        <div style="max-width: 800px;" data-aos="fade-right">
-            <span style="display: inline-block; padding: 6px 16px; background: var(--accent); color: var(--primary); font-weight: 700; font-size: 0.85rem; border-radius: 4px; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 2px;">
+<section class="home-hero">
+    <div class="container" style="position: relative; z-index: 2;">
+        <div class="hero-content" data-aos="fade-right">
+            <span class="hero-badge">
                 Leading Industrial Chemistry
             </span>
-            <h1 style="color: white; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.1; margin-bottom: 1.5rem; font-weight: 800;">
+            <h1 class="hero-title">
                 Precision Formulae for <span style="color: var(--accent);">Global Progress.</span>
             </h1>
-            <p style="font-size: 1.25rem; opacity: 0.9; margin-bottom: 3rem; line-height: 1.6; max-width: 600px;">
+            <p class="hero-description">
                 Nasim and Sons delivers ISO-certified, high-performance chemical solutions that drive efficiency across the manufacturing sector.
             </p>
-            <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
-                <a href="{% url 'products:landing' %}" class="btn btn-accent" style="padding: 1.2rem 3rem;">Explore Catalog</a>
-                <a href="{% url 'inquiries:quote_list' %}" class="btn btn-outline" style="padding: 1.2rem 3rem; border-color: white; color: white;">Get a Quote</a>
+            <div class="hero-actions">
+                <a href="{% url 'products:landing' %}" class="btn btn-accent">Explore Catalog</a>
+                <a href="{% url 'inquiries:quote_list' %}" class="btn btn-outline" style="border-color: white; color: white;">Get a Quote</a>
             </div>
         </div>
     </div>
     
-    <!-- Abstract Shapes -->
-    <div style="position: absolute; bottom: 0; right: 0; width: 40%; height: 100%; background: linear-gradient(to right, transparent, rgba(0, 212, 255, 0.05)); clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);"></div>
+    <!-- Abstract Shapes / Visuals -->
+    <div class="hero-visual"></div>
 </section>
+
+<style>
+    /* Home Hero Styles */
+    .home-hero {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        background: linear-gradient(rgba(10, 37, 64, 0.85), rgba(10, 37, 64, 0.75)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=2000&q=80');
+        background-size: cover;
+        background-position: center;
+        color: white;
+        padding: 100px 0 60px; /* Replaced padding-top with standard padding */
+    }
+
+    .hero-content { max-width: 800px; }
+    
+    .hero-badge {
+        display: inline-block;
+        padding: 8px 18px;
+        background: var(--accent);
+        color: var(--primary);
+        font-weight: 800;
+        font-size: 0.8rem;
+        border-radius: 4px;
+        margin-bottom: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .hero-title {
+        color: white;
+        font-size: clamp(2.5rem, 8vw, 4.5rem);
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+        font-weight: 800;
+    }
+
+    .hero-description {
+        font-size: clamp(1.1rem, 3vw, 1.4rem);
+        opacity: 0.9;
+        margin-bottom: 3.5rem;
+        line-height: 1.6;
+        max-width: 650px;
+    }
+
+    .hero-actions { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .hero-actions .btn { padding: 1.2rem 3rem; }
+
+    .hero-visual {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 40%;
+        height: 100%;
+        background: linear-gradient(to right, transparent, rgba(0, 212, 255, 0.05));
+        clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+    }
+
+    /* Tablet & Mobile Hero */
+    @media (max-width: 992px) {
+        .home-hero { min-height: auto; padding: 120px 0 80px; }
+        .hero-title { font-size: 3rem; }
+        .hero-description { margin-bottom: 2.5rem; }
+        .hero-visual { width: 100%; opacity: 0.3; }
+    }
+    
+    @media (max-width: 576px) {
+        .hero-title { font-size: 2.5rem; }
+        .hero-actions { flex-direction: column; }
+        .hero-actions .btn { width: 100%; }
+    }
+</style>
 
 <!-- Stats Bar -->
 <section style="background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 40px 0;">
