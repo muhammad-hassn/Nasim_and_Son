@@ -18,7 +18,7 @@ class BlogPost(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     category = models.ForeignKey(BlogCategory, on_delete=models.SET_NULL, null=True, blank=True)
     content = RichTextField()
-    image = models.ImageField(upload_to='blog/')
+    image = models.ImageField(upload_to='blog/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     is_published = models.BooleanField(default=True)
     

@@ -4,103 +4,178 @@
 {% block title %}Home | {{ company_name }}{% endblock %}
 
 {% block content %}
-<!-- HERO SECTION: Industrial Background, Left Aligned -->
-<section style="position: relative; height: 100vh; min-height: 700px; display: flex; align-items: center; background-image: linear-gradient(rgba(26, 54, 93, 0.85), rgba(26, 54, 93, 0.7)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=2000&q=80'); background-size: cover; background-position: center; overflow: hidden;">
-    
-    <div class="container" style="position: relative; z-index: 2;" data-aos="fade-right">
-        <span style="display: inline-block; padding: 0.5rem 1rem; background: var(--accent-color); color: var(--white); font-weight: 600; font-size: 0.9rem; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px; border-radius: var(--radius-sm); box-shadow: var(--shadow-sm);">
-            Premium Industrial Chemicals
-        </span>
-        
-        <h1 style="color: var(--white); font-size: clamp(3rem, 5vw, 5.5rem); margin-bottom: 2rem; line-height: 1.1; font-weight: 800; max-width: 800px; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">
-            Powering Industry with <span style="color: var(--accent-color);">Precision.</span>
-        </h1>
-        
-        <p style="font-size: 1.35rem; color: #f1f5f9; max-width: 600px; margin-bottom: 3rem; line-height: 1.6; text-shadow: 0 1px 4px rgba(0,0,0,0.5); font-weight: 500;">
-            Nasim and Sons delivers ISO-certified chemical solutions that drive efficiency and sustainability for global manufacturing.
-        </p>
-        
-        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
-            <a href="{% url 'products:landing' %}" class="btn btn-primary" style="padding: 1.25rem 3.5rem; font-size: 1.1rem; border-radius: var(--radius-sm); letter-spacing: 1px;">
-                EXPLORE PRODUCTS
-            </a>
-            <a href="{% url 'core:company' %}" class="btn btn-outline" style="padding: 1.25rem 3.5rem; font-size: 1.1rem; border-radius: var(--radius-sm); background: rgba(0,0,0,0.3); backdrop-filter: blur(4px); border-color: rgba(255,255,255,0.8);">
-                LEARN MORE
-            </a>
+<!-- Hero Section -->
+<section style="position: relative; height: 90vh; min-height: 700px; background: linear-gradient(rgba(10, 37, 64, 0.8), rgba(10, 37, 64, 0.7)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=2000&q=80'); background-size: cover; background-position: center; display: flex; align-items: center; color: white;">
+    <div class="container" style="z-index: 2;">
+        <div style="max-width: 800px;" data-aos="fade-right">
+            <span style="display: inline-block; padding: 6px 16px; background: var(--accent); color: var(--primary); font-weight: 700; font-size: 0.85rem; border-radius: 4px; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 2px;">
+                Leading Industrial Chemistry
+            </span>
+            <h1 style="color: white; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.1; margin-bottom: 1.5rem; font-weight: 800;">
+                Precision Formulae for <span style="color: var(--accent);">Global Progress.</span>
+            </h1>
+            <p style="font-size: 1.25rem; opacity: 0.9; margin-bottom: 3rem; line-height: 1.6; max-width: 600px;">
+                Nasim and Sons delivers ISO-certified, high-performance chemical solutions that drive efficiency across the manufacturing sector.
+            </p>
+            <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                <a href="{% url 'products:landing' %}" class="btn btn-accent" style="padding: 1.2rem 3rem;">Explore Catalog</a>
+                <a href="{% url 'inquiries:quote_list' %}" class="btn btn-outline" style="padding: 1.2rem 3rem; border-color: white; color: white;">Get a Quote</a>
+            </div>
         </div>
     </div>
     
-    <!-- Animated Scroll Indicator -->
-    <div style="position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 2; animation: bounce 2s infinite;">
-        <span style="display: block; color: rgba(255,255,255,0.6); font-size: 0.8rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px;">Scroll</span>
-        <i class="fas fa-arrow-down" style="color: var(--white); opacity: 0.8; font-size: 1.2rem;"></i>
-    </div>
+    <!-- Abstract Shapes -->
+    <div style="position: absolute; bottom: 0; right: 0; width: 40%; height: 100%; background: linear-gradient(to right, transparent, rgba(0, 212, 255, 0.05)); clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);"></div>
 </section>
 
-<!-- STATS SECTION: Trusted Row -->
-<section style="background: var(--bg-white); border-bottom: 1px solid var(--border-color); padding: 3rem 0;">
+<!-- Stats Bar -->
+<section style="background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 40px 0;">
     <div class="container">
-        <div class="grid grid-4" style="align-items: center; text-align: center;">
-            <div data-aos="fade-up" data-aos-delay="0">
-                <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary-color);">25+</div>
-                <div style="color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">Years Experience</div>
-            </div>
+        <div class="grid grid-4" style="text-align: center;">
             <div data-aos="fade-up" data-aos-delay="100">
-                <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary-color);">500+</div>
-                <div style="color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">Satisfied Clients</div>
+                <h3 style="font-size: 2.5rem; margin-bottom: 0;">25+</h3>
+                <p style="color: var(--text-muted); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1.5px; font-weight: 700;">Years of Excellence</p>
             </div>
             <div data-aos="fade-up" data-aos-delay="200">
-                <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary-color);">30+</div>
-                <div style="color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">Global Markets</div>
+                <h3 style="font-size: 2.5rem; margin-bottom: 0;">500+</h3>
+                <p style="color: var(--text-muted); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1.5px; font-weight: 700;">Industrial Clients</p>
             </div>
             <div data-aos="fade-up" data-aos-delay="300">
-                <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary-color);">ISO</div>
-                <div style="color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">Certified Quality</div>
+                <h3 style="font-size: 2.5rem; margin-bottom: 0;">30+</h3>
+                <p style="color: var(--text-muted); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1.5px; font-weight: 700;">Serving Countries</p>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="400">
+                <h3 style="font-size: 2.5rem; margin-bottom: 0;">ISO</h3>
+                <p style="color: var(--text-muted); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1.5px; font-weight: 700;">Certified Quality</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- FEATURES SECTION: Glassmorphism Cards -->
-<section class="section" style="background-color: var(--bg-body);">
+<!-- Product Categories -->
+<section class="section">
     <div class="container">
+        <div style="text-align: center; margin-bottom: 4rem;" data-aos="fade-up">
+            <h4 style="color: var(--accent-dark); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 0.5rem;">Our Catalog</h4>
+            <h2 style="font-size: 2.5rem;">Core Product Categories</h2>
+        </div>
+        
         <div class="grid grid-3">
-            <!-- Feature 1 -->
-            <div class="card glass-card" style="padding: 3rem 2rem; text-align: center; border: none;" data-aos="fade-up" data-aos-delay="100">
-                <div style="width: 70px; height: 70px; background: rgba(49, 130, 206, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
-                    <i class="fas fa-certificate" style="font-size: 2rem; color: var(--accent-color);"></i>
+            {% for category in categories %}
+            <a href="{{ category.get_absolute_url }}" class="card" style="padding: 3rem 2rem; text-align: center; display: block;" data-aos="fade-up">
+                <div style="width: 80px; height: 80px; background: var(--bg-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; color: var(--primary); font-size: 2rem; transition: var(--transition);">
+                    <i class="fas fa-flask"></i>
                 </div>
-                <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Certified Quality</h3>
-                <p style="color: var(--text-muted);">ISO certified manufacturing processes ensuring consistent purity and performance.</p>
+                <h3>{{ category.name }}</h3>
+                <p style="color: var(--text-muted); margin-top: 1rem; font-size: 0.9rem; line-height: 1.6;">{{ category.description|truncatewords:15 }}</p>
+                <div style="margin-top: 2rem; color: var(--accent-dark); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">
+                    View Products <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+                </div>
+                <style>
+                    .card:hover div i { transform: scale(1.1); color: var(--accent); }
+                    .card:hover div { background: var(--primary); }
+                </style>
+            </a>
+            {% endfor %}
+        </div>
+        
+        <div style="text-align: center; margin-top: 4rem;">
+            <a href="{% url 'products:landing' %}" class="btn btn-outline">Browse Full Range</a>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="section" style="background-color: var(--primary); color: white;">
+    <div class="container">
+        <div class="grid grid-2" style="align-items: center;">
+            <div data-aos="fade-right">
+                <h4 style="color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 1rem;">Why Nasim & Sons</h4>
+                <h2 style="color: white; font-size: 2.5rem; margin-bottom: 2rem;">Engineered for Competitive Advantage</h2>
+                <div style="display: grid; gap: 2rem;">
+                    <div style="display: flex; gap: 1.5rem;">
+                        <div style="font-size: 1.5rem; color: var(--accent);"><i class="fas fa-check-circle"></i></div>
+                        <div>
+                            <h4 style="color: white; margin-bottom: 0.5rem;">Rigorous QA/QC</h4>
+                            <p style="opacity: 0.7; font-size: 0.95rem;">Every batch undergoes strict multi-stage testing in our certified laboratories.</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 1.5rem;">
+                        <div style="font-size: 1.5rem; color: var(--accent);"><i class="fas fa-check-circle"></i></div>
+                        <div>
+                            <h4 style="color: white; margin-bottom: 0.5rem;">Technical Support</h4>
+                            <p style="opacity: 0.7; font-size: 0.95rem;">On-site application assistance and custom formulation development.</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 1.5rem;">
+                        <div style="font-size: 1.5rem; color: var(--accent);"><i class="fas fa-check-circle"></i></div>
+                        <div>
+                            <h4 style="color: white; margin-bottom: 0.5rem;">Sustainable Practices</h4>
+                            <p style="opacity: 0.7; font-size: 0.95rem;">Environmentally conscious manufacturing and waste reduction protocols.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <!-- Feature 2 -->
-            <div class="card glass-card" style="padding: 3rem 2rem; text-align: center; border: none;" data-aos="fade-up" data-aos-delay="200">
-                <div style="width: 70px; height: 70px; background: rgba(49, 130, 206, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
-                    <i class="fas fa-shipping-fast" style="font-size: 2rem; color: var(--accent-color);"></i>
+            <div style="position: relative;" data-aos="fade-left">
+                <img src="https://images.unsplash.com/photo-1574634534894-89d7576c8259?auto=format&fit=crop&w=800&q=80" style="border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);">
+                <div style="position: absolute; bottom: -30px; left: -30px; background: var(--accent); padding: 40px; border-radius: var(--radius-md); box-shadow: var(--shadow-lg); color: var(--primary);">
+                    <h2 style="margin-bottom: 0; font-size: 3rem;">25</h2>
+                    <p style="font-weight: 800; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem;">Years Legacy</p>
                 </div>
-                <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Global Logistics</h3>
-                <p style="color: var(--text-muted);">Efficient supply chain network delivering to over 30 countries worldwide.</p>
-            </div>
-            
-            <!-- Feature 3 -->
-            <div class="card glass-card" style="padding: 3rem 2rem; text-align: center; border: none;" data-aos="fade-up" data-aos-delay="300">
-                <div style="width: 70px; height: 70px; background: rgba(49, 130, 206, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
-                    <i class="fas fa-flask" style="font-size: 2rem; color: var(--accent-color);"></i>
-                </div>
-                <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">R&D Support</h3>
-                <p style="color: var(--text-muted);">Technical experts ready to assist with custom formulations and application advice.</p>
             </div>
         </div>
     </div>
 </section>
 
-<style>
-/* CSS Animation for Bounce */
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
-  40% {transform: translateX(-50%) translateY(-10px);}
-  60% {transform: translateX(-50%) translateY(-5px);}
-}
-</style>
+<!-- Latest Insights Section -->
+<section class="section">
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem;" data-aos="fade-up">
+            <div>
+                <h4 style="color: var(--accent-dark); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 0.5rem;">Intellectual Capital</h4>
+                <h2 style="font-size: 2.5rem;">Latest Industry Insights</h2>
+            </div>
+            <a href="{% url 'blog:list' %}" style="color: var(--primary); font-weight: 700; border-bottom: 2px solid var(--accent);">View All Articles &rarr;</a>
+        </div>
+        
+        <div class="grid grid-3">
+            {% for post in latest_posts %}
+            <div class="card" data-aos="fade-up">
+                <div style="height: 200px; background: var(--bg-light); overflow: hidden;">
+                    {% if post.image %}
+                    <img src="{{ post.image.url }}" style="height: 100%; width: 100%; object-fit: cover;">
+                    {% else %}
+                    <div style="height: 100%; display: flex; align-items: center; justify-content: center; color: var(--border); font-size: 4rem;">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    {% endif %}
+                </div>
+                <div style="padding: 2rem;">
+                    <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; letter-spacing: 1px;">{{ post.created_at|date:"F d, Y" }}</span>
+                    <h3 style="font-size: 1.25rem; margin: 1rem 0; line-height: 1.4;">{{ post.title }}</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">{{ post.content|striptags|truncatewords:15 }}</p>
+                    <a href="{{ post.get_absolute_url }}" style="color: var(--primary); font-weight: 700; font-size: 0.85rem; text-transform: uppercase;">Read Article &rarr;</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="section" style="padding-bottom: 0;">
+    <div class="container">
+        <div style="background: linear-gradient(135deg, var(--accent) 0%, #00bfff 100%); padding: 80px; border-radius: var(--radius-lg); text-align: center; color: var(--primary);" data-aos="zoom-in">
+            <h2 style="font-size: 3rem; margin-bottom: 1.5rem;">Ready to partner with us?</h2>
+            <p style="font-size: 1.25rem; font-weight: 500; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto; opacity: 0.9;">
+                Discuss your specific requirements with our technical consultants today.
+            </p>
+            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                <a href="{% url 'core:contact' %}" class="btn btn-primary" style="padding: 1.2rem 4rem;">Contact Us</a>
+                <a href="{% url 'inquiries:quote_list' %}" class="btn btn-outline" style="padding: 1.2rem 4rem; border-color: var(--primary);">Request Pricing</a>
+            </div>
+        </div>
+    </div>
+</section>
+
 {% endblock %}

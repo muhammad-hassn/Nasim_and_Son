@@ -54,4 +54,9 @@ def quote_list(request):
         messages.success(request, "Your quote request has been sent!")
         return redirect('core:home')
         
-    return render(request, 'inquiries/quote_list.html', {'cart_items': cart.get_items()})
+    from blog.models import BlogPost
+    latest_posts = BlogPost.objects.filter(is_published=True).order_by('-created_at')[:3]
+    return render(request, 'inquiries/quote_list.html', {
+        'cart_items': cart.get_items(),
+        'latest_posts': latest_posts
+    })
