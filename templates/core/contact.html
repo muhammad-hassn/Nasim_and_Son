@@ -12,92 +12,85 @@
     </div>
 </section>
 
-<section class="section" style="margin-top: -60px;">
+<section class="section">
     <div class="container">
-        <div class="grid" style="grid-template-columns: 0.8fr 1.2fr; gap: 5rem; align-items: stretch;">
+        <div class="contact-layout">
             
             <!-- Contact Info -->
-            <div data-aos="fade-right">
-                <div style="margin-bottom: 3rem;">
+            <div class="contact-info" data-aos="fade-right">
+                <div style="margin-bottom: 2.5rem;">
                     <h2 style="font-size: 2rem; margin-bottom: 1rem;">Direct Access</h2>
-                    <p style="color: var(--text-muted); line-height: 1.8;">Our administrative centers are strategically located to provide seamless global support across all time zones.</p>
+                    <p style="color: var(--text-muted); line-height: 1.6;">Our administrative centers provide seamless global support across all time zones.</p>
                 </div>
 
-                <div style="display: grid; gap: 2.5rem;">
-                    <div style="display: flex; gap: 1.5rem;">
-                        <div style="width: 50px; height: 50px; background: var(--bg-white); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--accent-dark); font-size: 1.2rem; flex-shrink: 0;">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
+                <div style="display: grid; gap: 2rem;">
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
                         <div>
                             <h4 style="margin-bottom: 0.25rem;">Global Headquarters</h4>
-                            <p style="color: var(--text-muted); font-size: 0.95rem;">Industrial Estate, Phase II, Karachi, PK</p>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">Industrial Estate, Karachi, PK</p>
                         </div>
                     </div>
 
-                    <div style="display: flex; gap: 1.5rem;">
-                        <div style="width: 50px; height: 50px; background: var(--bg-white); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--accent-dark); font-size: 1.2rem; flex-shrink: 0;">
-                            <i class="fas fa-phone"></i>
-                        </div>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-phone"></i></div>
                         <div>
                             <h4 style="margin-bottom: 0.25rem;">Technical Support</h4>
-                            <p style="color: var(--text-muted); font-size: 0.95rem;">+92 300 1234567 (Direct Line)</p>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">+92 300 1234567</p>
                         </div>
                     </div>
 
-                    <div style="display: flex; gap: 1.5rem;">
-                        <div style="width: 50px; height: 50px; background: var(--bg-white); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--accent-dark); font-size: 1.2rem; flex-shrink: 0;">
-                            <i class="fas fa-envelope"></i>
-                        </div>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-envelope"></i></div>
                         <div>
                             <h4 style="margin-bottom: 0.25rem;">General Inquiries</h4>
-                            <p style="color: var(--text-muted); font-size: 0.95rem;">info@nasimandsons.com</p>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">info@nasimandsons.com</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="card" style="margin-top: 4rem; padding: 2.5rem; background: var(--primary); color: white; border: none;">
+                <div class="card hide-mobile" style="margin-top: 3rem; padding: 2rem; background: var(--primary); color: white; border: none;">
                     <h4 style="color: white; margin-bottom: 1rem;">Logistics Notice</h4>
-                    <p style="font-size: 0.9rem; opacity: 0.7; line-height: 1.6;">Expected response time for technical data requests is currently 4-6 business hours.</p>
+                    <p style="font-size: 0.85rem; opacity: 0.7; line-height: 1.6;">Expected response time for technical data requests is 4-6 business hours.</p>
                 </div>
             </div>
 
             <!-- Contact Form -->
-            <div data-aos="fade-left">
-                <div class="card" style="padding: 4rem; border: none; box-shadow: var(--shadow-lg);">
-                    <h3 style="margin-bottom: 2.5rem; font-size: 1.8rem;">Send a Message</h3>
+            <div class="contact-form-container" data-aos="fade-left">
+                <div class="card" style="padding: 2.5rem; border: none; box-shadow: var(--shadow-lg);">
+                    <h3 style="margin-bottom: 2rem; font-size: 1.6rem;">Send a Message</h3>
                     
                     <form method="post">
                         {% csrf_token %}
                         <div style="display: grid; gap: 1.5rem;">
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                            <div class="form-grid">
                                 <div>
-                                    <label style="display: block; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.75rem;">Your Name</label>
-                                    <input type="text" name="name" required placeholder="John Doe" style="width: 100%; padding: 1rem 1.5rem; border: 2px solid var(--border); border-radius: var(--radius-sm); font-size: 1rem; outline: none; transition: var(--transition);">
+                                    <label class="form-label">Name</label>
+                                    <input type="text" name="name" required placeholder="John Doe" class="form-input">
                                 </div>
                                 <div>
-                                    <label style="display: block; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.75rem;">Phone (Optional)</label>
-                                    <input type="tel" name="phone" placeholder="+92 ..." style="width: 100%; padding: 1rem 1.5rem; border: 2px solid var(--border); border-radius: var(--radius-sm); font-size: 1rem; outline: none;">
+                                    <label class="form-label">Phone</label>
+                                    <input type="tel" name="phone" placeholder="+92 ..." class="form-input">
                                 </div>
                             </div>
 
                             <div>
-                                <label style="display: block; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.75rem;">Email Address</label>
-                                <input type="email" name="email" required placeholder="john@company.com" style="width: 100%; padding: 1rem 1.5rem; border: 2px solid var(--border); border-radius: var(--radius-sm); font-size: 1rem; outline: none;">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" name="email" required placeholder="john@company.com" class="form-input">
                             </div>
 
                             <div>
-                                <label style="display: block; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.75rem;">Subject</label>
-                                <input type="text" name="subject" required placeholder="Technical Consultation / Bulk Order" style="width: 100%; padding: 1rem 1.5rem; border: 2px solid var(--border); border-radius: var(--radius-sm); font-size: 1rem; outline: none;">
+                                <label class="form-label">Subject</label>
+                                <input type="text" name="subject" required placeholder="Technical Consultation" class="form-input">
                             </div>
 
                             <div>
-                                <label style="display: block; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.75rem;">Message</label>
-                                <textarea name="message" rows="5" required placeholder="How can our technical team assist you?" style="width: 100%; padding: 1rem 1.5rem; border: 2px solid var(--border); border-radius: var(--radius-sm); font-size: 1rem; outline: none; resize: none;"></textarea>
+                                <label class="form-label">Message</label>
+                                <textarea name="message" rows="5" required placeholder="Your message..." class="form-input" style="resize: none;"></textarea>
                             </div>
 
-                            <button type="submit" class="btn btn-primary" style="padding: 1.5rem; width: 100%; margin-top: 1rem; font-size: 1.1rem;">
+                            <button type="submit" class="btn btn-primary" style="padding: 1.2rem; width: 100%; font-size: 1rem;">
                                 Submit Inquiry
-                                <i class="fas fa-paper-plane" style="margin-left: 10px;"></i>
                             </button>
                         </div>
                     </form>
@@ -107,6 +100,39 @@
         </div>
     </div>
 </section>
+
+<style>
+    .contact-layout {
+        display: grid;
+        grid-template-columns: 0.8fr 1.2fr;
+        gap: 4rem;
+        margin-top: -60px;
+    }
+    .info-item { display: flex; gap: 1.25rem; }
+    .info-icon {
+        width: 45px; height: 45px; background: var(--bg-white); border: 1px solid var(--border);
+        border-radius: 10px; display: flex; align-items: center; justify-content: center;
+        color: var(--accent-dark); font-size: 1.1rem; flex-shrink: 0;
+    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .form-label { display: block; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.6rem; }
+    .form-input { width: 100%; padding: 0.9rem 1.2rem; border: 2px solid var(--border); border-radius: var(--radius-sm); font-size: 0.95rem; outline: none; transition: var(--transition); }
+    .form-input:focus { border-color: var(--accent); }
+
+    /* Tablet & Mobile Adjustments */
+    @media (max-width: 992px) {
+        .contact-layout { grid-template-columns: 1fr; gap: 3rem; margin-top: -20px; }
+        .hide-mobile { display: none; }
+        .contact-info { text-align: center; }
+        .info-item { justify-content: center; }
+    }
+    @media (max-width: 576px) {
+        .form-grid { grid-template-columns: 1fr; }
+        .card { padding: 1.5rem 1.25rem !important; }
+        .contact-layout { margin-top: 0; }
+        h2 { font-size: 1.75rem !important; }
+    }
+</style>
 
 <!-- Simple Map Placeholder -->
 <section class="section" style="padding-bottom: 0;">
