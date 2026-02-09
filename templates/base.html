@@ -4,8 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{{ company_name }}{% endblock %}</title>
-    <meta name="description" content="{% block meta_description %}Leading chemical solutions provider.{% endblock %}">
+    <meta name="robots" content="index, follow">
+    <title>{% block title %}{{ company_name }} | Precision Chemical Solutions{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Nasim and Sons - Leading provider of ZDHC-certified industrial chemical solutions, high-purity variants, and technical consultancy since 1998.{% endblock %}">
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{% block og_title %}{{ company_name }}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Precision Chemical Solutions for Global Industrial Advancement.{% endblock %}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,12 +48,16 @@
 
         /* Base Styles */
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            overflow-x: hidden !important;
+            width: 100%;
+            position: relative;
+        }
         body {
             font-family: 'Open Sans', sans-serif;
             color: var(--text-main);
             background-color: var(--bg-light);
             line-height: 1.6;
-            overflow-x: hidden;
         }
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Montserrat', sans-serif;
@@ -194,11 +206,12 @@
             font-size: 1.5rem; 
             color: var(--primary); 
             cursor: pointer; 
-            z-index: 1002;
+            z-index: 2002;
             width: 40px;
             height: 40px;
             text-align: center;
             line-height: 40px;
+            transition: var(--transition);
         }
         
         .nav-overlay {
@@ -207,7 +220,8 @@
             left: 0;
             width: 100%;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(10, 37, 64, 0.7);
+            backdrop-filter: blur(4px);
             z-index: 1000;
             opacity: 0;
             visibility: hidden;
@@ -219,27 +233,39 @@
             .nav-links {
                 position: fixed;
                 top: 0;
-                right: -100%;
-                width: 80%;
-                max-width: 320px;
+                right: 0;
+                width: 75%;
+                max-width: 300px;
                 height: 100vh;
                 background: var(--bg-white);
                 flex-direction: column;
                 justify-content: flex-start;
-                padding-top: 100px;
+                padding: 100px 30px;
                 gap: 2rem;
-                box-shadow: var(--shadow-lg);
+                box-shadow: -10px 0 30px rgba(0,0,0,0.1);
                 transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                z-index: 2001;
+                z-index: 2005;
+                overflow-y: auto;
+                transform: translateX(100%);
+                display: flex !important;
             }
-            .nav-links.active { right: 0; }
+            .nav-links.active { transform: translateX(0); }
+            .nav-links li { width: 100%; }
+            .nav-links a { 
+                display: block; 
+                padding: 10px 0; 
+                font-size: 1.1rem;
+                border-bottom: 1px solid var(--bg-light); 
+            }
+            .btn-quote-nav { justify-content: center; }
+            
             .mobile-toggle { 
                 display: flex !important; 
                 visibility: visible !important; 
                 align-items: center;
                 justify-content: center;
-                font-size: 1.8rem; /* Slightly larger like the image */
-                color: var(--primary); /* Dark color like the image */
+                font-size: 1.8rem;
+                color: var(--primary);
             }
         }
 
@@ -366,6 +392,7 @@
                     <li><a href="{% url 'core:home' %}">Home</a></li>
                     <li><a href="{% url 'core:company' %}">Company</a></li>
                     <li><a href="{% url 'products:landing' %}">Products</a></li>
+                    <li><a href="{% url 'core:certificates' %}" target="_blank">Certificates</a></li>
                     <li><a href="{% url 'blog:list' %}">Insights</a></li>
                     <li><a href="{% url 'core:contact' %}">Contact</a></li>
                     <li>
@@ -398,6 +425,42 @@
 
         {% block content %}{% endblock %}
     </main>
+
+    <!-- Our Offices Section -->
+    <section class="section" style="background: var(--bg-white); border-top: 1px solid var(--border);">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 3rem;" data-aos="fade-up">
+                <h4 style="color: var(--accent-dark); text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 0.5rem; font-weight: 800;">Global Presence</h4>
+                <h2 style="font-size: 2rem;">Our Offices</h2>
+            </div>
+            
+            <div class="grid grid-3" style="max-width: 900px; margin: 0 auto; gap: 3rem;">
+                <div style="text-align: center;" data-aos="fade-up" data-aos-delay="100">
+                    <div style="font-size: 3rem; margin-bottom: 1rem; border-radius: 8px; overflow: hidden; display: inline-block; box-shadow: var(--shadow-sm);">
+                        🇵🇰
+                    </div>
+                    <h4 style="margin-bottom: 0.5rem; color: var(--primary);">Pakistan</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Industrial Estate, Karachi</p>
+                </div>
+                
+                <div style="text-align: center;" data-aos="fade-up" data-aos-delay="200">
+                    <div style="font-size: 3rem; margin-bottom: 1rem; border-radius: 8px; overflow: hidden; display: inline-block; box-shadow: var(--shadow-sm);">
+                        🇹🇷
+                    </div>
+                    <h4 style="margin-bottom: 0.5rem; color: var(--primary);">Turkey</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Organize Sanayi, Istanbul</p>
+                </div>
+                
+                <div style="text-align: center;" data-aos="fade-up" data-aos-delay="300">
+                    <div style="font-size: 3rem; margin-bottom: 1rem; border-radius: 8px; overflow: hidden; display: inline-block; box-shadow: var(--shadow-sm);">
+                        🇧🇩
+                    </div>
+                    <h4 style="margin-bottom: 0.5rem; color: var(--primary);">Bangladesh</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Tejgaon Industrial Area, Dhaka</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer>

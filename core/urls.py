@@ -6,5 +6,6 @@ app_name = 'core'
 urlpatterns = [
     path('', views.home, name='home'),
     path('company/', views.company, name='company'),
+    path('certificates/', views.certificates, name='certificates'),
     path('contact-us/', views.contact, name='contact'),
 ]

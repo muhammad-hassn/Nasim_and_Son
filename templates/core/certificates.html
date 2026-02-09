@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Certificates | {{ company_name }}{% endblock %}
+
+{% block content %}
+<!-- Page Hero -->
+<section class="page-hero">
+    <div class="container" data-aos="fade-up">
+        <h1 style="color: white;">Quality Certificates</h1>
+        <p>View and download our official certifications and quality assurance documents.</p>
+    </div>
+</section>
+
+<!-- Certificates Grid -->
+<section class="section" style="margin-top: -60px;">
+    <div class="container">
+        <div class="grid grid-3">
+            <!-- Example Certificate Card -->
+            <div class="card" style="padding: 3rem; text-align: center; border: none; box-shadow: var(--shadow-lg);" data-aos="fade-up" data-aos-delay="100">
+                <div style="font-size: 4rem; color: var(--accent-dark); margin-bottom: 2rem;">
+                    <i class="far fa-file-pdf"></i>
+                </div>
+                <h3 style="margin-bottom: 1rem;">ZDHC Certificate</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem;">Zero Discharge of Hazardous Chemicals compliance certification.</p>
+                
+                <div style="display: flex; gap: 1rem; flex-direction: column;">
+                    <a href="#" class="btn btn-outline" style="width: 100%;" target="_blank">
+                        <i class="fas fa-eye"></i> View PDF
+                    </a>
+                    <a href="#" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-download"></i> Download PDF
+                    </a>
+                </div>
+            </div>
+
+            <div class="card" style="padding: 3rem; text-align: center; border: none; box-shadow: var(--shadow-lg);" data-aos="fade-up" data-aos-delay="200">
+                <div style="font-size: 4rem; color: var(--accent-dark); margin-bottom: 2rem;">
+                    <i class="far fa-file-pdf"></i>
+                </div>
+                <h3 style="margin-bottom: 1rem;">ISO 9001:2015</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem;">Quality Management System (QMS) official certificate.</p>
+                
+                <div style="display: flex; gap: 1rem; flex-direction: column;">
+                    <a href="#" class="btn btn-outline" style="width: 100%;" target="_blank">
+                        <i class="fas fa-eye"></i> View PDF
+                    </a>
+                    <a href="#" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-download"></i> Download PDF
+                    </a>
+                </div>
+            </div>
+
+            <div class="card" style="padding: 3rem; text-align: center; border: none; box-shadow: var(--shadow-lg);" data-aos="fade-up" data-aos-delay="300">
+                <div style="font-size: 4rem; color: var(--accent-dark); margin-bottom: 2rem;">
+                    <i class="far fa-file-pdf"></i>
+                </div>
+                <h3 style="margin-bottom: 1rem;">Process Audit</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem;">Official technical audit and compliance document.</p>
+                
+                <div style="display: flex; gap: 1rem; flex-direction: column;">
+                    <a href="#" class="btn btn-outline" style="width: 100%;" target="_blank">
+                        <i class="fas fa-eye"></i> View PDF
+                    </a>
+                    <a href="#" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-download"></i> Download PDF
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Note for User -->
+        <div style="margin-top: 4rem; padding: 2rem; background: var(--bg-light); border-radius: var(--radius-md); border-left: 4px solid var(--accent);">
+            <p style="font-size: 0.9rem; color: var(--text-muted);">
+                <strong>Note:</strong> This page is a template. The backend logic to pull these PDFs from the admin panel will need to be connected to the Certs model.
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}

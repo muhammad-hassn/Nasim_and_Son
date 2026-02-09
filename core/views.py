@@ -17,6 +17,14 @@ def home(request):
 def company(request):
     return render(request, 'core/company.html')
 
+from .models import Certificate
+
+def certificates(request):
+    latest_cert = Certificate.objects.all().first()
+    if latest_cert and latest_cert.pdf_file:
+        return redirect(latest_cert.pdf_file.url)
+    return render(request, 'core/certificates.html')
+
 def contact(request):
     if request.method == 'POST':
         name = request.POST.get('name')
