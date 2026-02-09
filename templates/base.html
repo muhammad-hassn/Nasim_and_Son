@@ -15,6 +15,45 @@
     <meta property="og:description" content="{% block og_description %}Precision Chemical Solutions for Global Industrial Advancement.{% endblock %}">
     <meta property="og:url" content="{{ request.build_absolute_uri }}">
     
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "{{ company_name }}",
+      "image": "https://flagcdn.com/w160/pk.png",
+      "@id": "{{ request.build_absolute_uri }}",
+      "url": "{{ request.build_absolute_uri }}",
+      "telephone": "+92 300 1234567",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Federal B Area Al Noor Society Block 19 Gulberg Town",
+        "addressLocality": "Karachi",
+        "addressRegion": "Sindh",
+        "postalCode": "75950",
+        "addressCountry": "PK"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 24.954729,
+        "longitude": 67.074825
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "opens": "09:00",
+        "closes": "18:00"
+      }
+    }
+    </script>
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -532,7 +571,7 @@
 
                 <div class="footer-contact">
                     <h4>Global HQ</h4>
-                    <p><i class="fas fa-map-marker-alt"></i> Industrial Estate, Karachi, PK</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Al Noor Society, Block 19, FB Area, Karachi, PK</p>
                     <p><i class="fas fa-envelope"></i> info@nasimandsons.com</p>
                     <p><i class="fas fa-phone"></i> +92 300 1234567</p>
                     <p><i class="fas fa-clock"></i> Mon - Sat: 9:00 - 18:00</p>
