@@ -618,6 +618,42 @@
         toggle.addEventListener('click', toggleMenu);
         overlay.addEventListener('click', toggleMenu);
 
+        // Count Up Animation
+        const countUp = (el) => {
+            const target = parseInt(el.getAttribute('data-count'));
+            const duration = 2000; // 2 seconds
+            const increment = target / (duration / 16);
+            let current = 0;
+
+            const update = () => {
+                current += increment;
+                if (current < target) {
+                    el.innerText = Math.floor(current) + (el.getAttribute('data-suffix') || '');
+                    requestAnimationFrame(update);
+                } else {
+                    el.innerText = target + (el.getAttribute('data-suffix') || '');
+                }
+            };
+            update();
+        };
+
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    countUp(entry.target);
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('[data-count]').forEach(stat => {
+            statsObserver.observe(stat);
+        });
+
         // Close menu when clicking links
         nav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
