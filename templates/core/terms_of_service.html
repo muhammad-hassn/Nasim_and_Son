@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Terms of Service | {{ company_name }}{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="container" data-aos="fade-up">
+        <h1 style="color: white;">Terms of Service</h1>
+        <p>The legal framework governing our professional relationship and services.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="card" style="padding: 4rem; border: none; box-shadow: var(--shadow-md);">
+            <div style="max-width: 800px; margin: 0 auto;">
+                <h2 style="margin-bottom: 2rem;">Service Agreement</h2>
+                <p style="color: var(--text-muted); margin-bottom: 2rem;">
+                    By using this website, you agree to comply with and be bound by the following terms and conditions of use.
+                </p>
+
+                <h3 style="margin-bottom: 1rem;">1. Professional Conduct</h3>
+                <p style="color: var(--text-muted); margin-bottom: 2rem;">
+                    Users are expected to provide accurate information during the inquiry and consultation process. Misrepresentation of industrial requirements is strictly prohibited.
+                </p>
+
+                <h3 style="margin-bottom: 1rem;">2. Intellectual Property</h3>
+                <p style="color: var(--text-muted); margin-bottom: 2rem;">
+                    All content, including chemical formulae descriptions, technical insights, and branding, is the property of Nasim and Sons and protected by international law.
+                </p>
+
+                <h3 style="margin-bottom: 1rem;">3. Limitation of Liability</h3>
+                <p style="color: var(--text-muted); margin-bottom: 2rem;">
+                    While we strive for precision, technical data provided on this site is for informational purposes and should be verified with our consultants for specific industrial applications.
+                </p>
+
+                <h3 style="margin-bottom: 1rem;">4. Governing Law</h3>
+                <p style="color: var(--text-muted);">
+                    These terms are governed by the laws of Pakistan, in accordance with our headquarters location.
+                </p>
+                <div style="margin-top: 3rem; font-size: 0.85rem; opacity: 0.6;">
+                    Last updated: {% now "F d, Y" %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

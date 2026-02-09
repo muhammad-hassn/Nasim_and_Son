@@ -434,31 +434,65 @@
                 <h2 style="font-size: 2rem;">Our Offices</h2>
             </div>
             
-            <div class="grid grid-3" style="max-width: 900px; margin: 0 auto; gap: 3rem;">
+            <div class="grid grid-5-custom" style="max-width: 1100px; margin: 0 auto; gap: 2rem;">
+                <!-- Pakistan -->
                 <div style="text-align: center;" data-aos="fade-up" data-aos-delay="100">
-                    <div style="font-size: 3rem; margin-bottom: 1rem; border-radius: 8px; overflow: hidden; display: inline-block; box-shadow: var(--shadow-sm);">
-                        🇵🇰
+                    <div style="margin-bottom: 1.5rem; display: inline-block;">
+                        <img src="https://flagcdn.com/w160/pk.png" style="width: 80px; height: auto; border-radius: 8px; box-shadow: var(--shadow-sm); border: 1px solid var(--border);">
                     </div>
                     <h4 style="margin-bottom: 0.5rem; color: var(--primary);">Pakistan</h4>
                     <p style="font-size: 0.85rem; color: var(--text-muted);">Industrial Estate, Karachi</p>
                 </div>
                 
+                <!-- Turkey -->
                 <div style="text-align: center;" data-aos="fade-up" data-aos-delay="200">
-                    <div style="font-size: 3rem; margin-bottom: 1rem; border-radius: 8px; overflow: hidden; display: inline-block; box-shadow: var(--shadow-sm);">
-                        🇹🇷
+                    <div style="margin-bottom: 1.5rem; display: inline-block;">
+                        <img src="https://flagcdn.com/w160/tr.png" style="width: 80px; height: auto; border-radius: 8px; box-shadow: var(--shadow-sm); border: 1px solid var(--border);">
                     </div>
                     <h4 style="margin-bottom: 0.5rem; color: var(--primary);">Turkey</h4>
                     <p style="font-size: 0.85rem; color: var(--text-muted);">Organize Sanayi, Istanbul</p>
                 </div>
                 
+                <!-- Bangladesh -->
                 <div style="text-align: center;" data-aos="fade-up" data-aos-delay="300">
-                    <div style="font-size: 3rem; margin-bottom: 1rem; border-radius: 8px; overflow: hidden; display: inline-block; box-shadow: var(--shadow-sm);">
-                        🇧🇩
+                    <div style="margin-bottom: 1.5rem; display: inline-block;">
+                        <img src="https://flagcdn.com/w160/bd.png" style="width: 80px; height: auto; border-radius: 8px; box-shadow: var(--shadow-sm); border: 1px solid var(--border);">
                     </div>
                     <h4 style="margin-bottom: 0.5rem; color: var(--primary);">Bangladesh</h4>
                     <p style="font-size: 0.85rem; color: var(--text-muted);">Tejgaon Industrial Area, Dhaka</p>
                 </div>
+
+                <!-- China -->
+                <div style="text-align: center;" data-aos="fade-up" data-aos-delay="400">
+                    <div style="margin-bottom: 1.5rem; display: inline-block;">
+                        <img src="https://flagcdn.com/w160/cn.png" style="width: 80px; height: auto; border-radius: 8px; box-shadow: var(--shadow-sm); border: 1px solid var(--border);">
+                    </div>
+                    <h4 style="margin-bottom: 0.5rem; color: var(--primary);">China</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Pudong District, Shanghai</p>
+                </div>
+
+                <!-- UAE -->
+                <div style="text-align: center;" data-aos="fade-up" data-aos-delay="500">
+                    <div style="margin-bottom: 1.5rem; display: inline-block;">
+                        <img src="https://flagcdn.com/w160/ae.png" style="width: 80px; height: auto; border-radius: 8px; box-shadow: var(--shadow-sm); border: 1px solid var(--border);">
+                    </div>
+                    <h4 style="margin-bottom: 0.5rem; color: var(--primary);">UAE</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Business Bay, Dubai</p>
+                </div>
             </div>
+
+            <style>
+                .grid-5-custom {
+                    display: grid;
+                    grid-template-columns: repeat(5, 1fr);
+                }
+                @media (max-width: 992px) {
+                    .grid-5-custom { grid-template-columns: repeat(3, 1fr); gap: 3rem 2rem; }
+                }
+                @media (max-width: 640px) {
+                    .grid-5-custom { grid-template-columns: 1fr; gap: 3rem; }
+                }
+            </style>
         </div>
     </section>
 
@@ -491,8 +525,8 @@
                     <ul>
                         <li><a href="{% url 'core:contact' %}">Contact Us</a></li>
                         <li><a href="{% url 'inquiries:quote_list' %}">Request Quote</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="{% url 'core:privacy_policy' %}">Privacy Policy</a></li>
+                        <li><a href="{% url 'core:terms_of_service' %}">Terms of Service</a></li>
                     </ul>
                 </div>
 
