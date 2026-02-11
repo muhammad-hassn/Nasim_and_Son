@@ -12,4 +12,4 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'category', 'is_active')
     list_filter = ('category', 'is_active')
     prepopulated_fields = {'slug': ('name',)}
-    search_fields = ('name', 'description')
+    search_fields = ('name', 'full_description')

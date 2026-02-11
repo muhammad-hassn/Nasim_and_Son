@@ -34,6 +34,7 @@ class Product(SEOModel):
     name = models.CharField(max_length=255)
     slug = models.SlugField(unique=True, blank=True)
     image = models.ImageField(upload_to='products/')
+    qr_code = models.ImageField(upload_to='products/qrcodes/', blank=True, null=True, help_text="Upload QR code image")
     short_description = models.TextField(help_text="Shown in list view")
     full_description = models.TextField(help_text="Start with what the product is")
     applications = models.TextField(blank=True, help_text="Bullet points or text")
