@@ -70,16 +70,25 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'nasim_db',
+#         'USER': 'nasim_user',
+#         'PASSWORD': 'shariq@@',
+#         'HOST': '127.0.0.1',
+#         'PORT': '4080',
+#     }
+# }
+import dj_database_url
+import os
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'nasim_db',
-        'USER': 'nasim_user',
-        'PASSWORD': 'shariq@@',
-        'HOST': '127.0.0.1',
-        'PORT': '4080',
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL')
+    )
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
