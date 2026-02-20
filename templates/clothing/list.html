@@ -10,95 +10,122 @@
 {% endblock %}
 
 {% block content %}
-<!-- Breadcrumbs -->
-<div class="breadcrumb-area" style="padding: 20px 0; background: #fff; border-bottom: 1px solid var(--border);">
+<!-- Premium Header Section -->
+<section class="clothing-hero" style="background: linear-gradient(rgba(10, 37, 64, 0.8), rgba(10, 37, 64, 0.8)), url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center; padding: 100px 0 60px; color: white; text-align: center;">
     <div class="container">
-        <nav style="font-size: 0.85rem; color: var(--text-muted);">
-            <a href="{% url 'core:home' %}">Home</a> &nbsp;/&nbsp;
-            <a href="{% url 'clothing:list' %}">Clothing</a>
-            {% if category %}
-                &nbsp;/&nbsp; <span>{{ category.name }}</span>
-            {% endif %}
+        <nav class="breadcrumb-nav" style="margin-bottom: 2rem; opacity: 0.8; font-size: 0.9rem;">
+            <a href="{% url 'core:home' %}" style="color: white;">Home</a> / 
+            <a href="{% url 'clothing:list' %}" style="color: white;">Clothing</a>
+            {% if category %} / <span style="color: var(--accent);">{{ category.name }}</span> {% endif %}
         </nav>
-    </div>
-</div>
-
-<section class="page-hero">
-    <div class="container">
-        <h1 data-aos="fade-up">{% if category %}{{ category.name }}{% else %}Premium Clothing Line{% endif %}</h1>
-        <p data-aos="fade-up" data-aos-delay="100">
-            {% if category %}{{ category.description }}{% else %}Engineered for durability, designed for style.{% endif %}
+        <h1 style="font-size: clamp(2.5rem, 8vw, 3.5rem); font-weight: 800; margin-bottom: 1.5rem; letter-spacing: -1px; line-height: 1;" data-aos="fade-up">
+            {% if category %}{{ category.name }}{% else %}The Clothing Collection{% endif %}
+        </h1>
+        <p style="max-width: 700px; margin: 0 auto; font-size: 1.1rem; opacity: 0.9; line-height: 1.6;" data-aos="fade-up" data-aos-delay="100">
+            {% if category %}{{ category.description }}{% else %}Discover our range of precision-crafted apparel, from heavy-duty industrial workwear to premium lifestyle streetwear.{% endif %}
         </p>
     </div>
 </section>
 
-<section class="section">
+<!-- Filter & Products Area -->
+<section class="section" style="background: var(--bg-light);">
     <div class="container">
-        <div class="grid" style="grid-template-columns: 250px 1fr; gap: 3rem;">
-            <!-- Filters Sidebar -->
-            <aside class="filters-sidebar">
-                <div style="margin-bottom: 2rem;">
-                    <h3 style="font-size: 1.1rem; margin-bottom: 1rem; border-bottom: 2px solid var(--accent); display: inline-block;">Categories</h3>
-                    <ul style="margin-top: 1rem;">
-                        <li style="margin-bottom: 0.5rem;"><a href="{% url 'clothing:list' %}" style="{% if not category %}color: var(--accent-dark); font-weight: 700;{% endif %}">All Clothing</a></li>
-                        {% for cat in categories %}
-                            <li style="margin-bottom: 0.5rem;">
-                                <a href="{% url 'clothing:category_detail' cat.slug %}" style="{% if category.id == cat.id %}color: var(--accent-dark); font-weight: 700;{% endif %}">{{ cat.name }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                
-                <div style="margin-bottom: 2rem;">
-                    <h3 style="font-size: 1.1rem; margin-bottom: 1rem; border-bottom: 2px solid var(--accent); display: inline-block;">Filter by Type</h3>
-                    <div style="margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem;">
-                        <a href="{% url 'products:landing' %}" class="btn btn-outline" style="font-size: 0.75rem; padding: 0.5rem 1rem;">Chemicals</a>
-                        <a href="{% url 'clothing:list' %}" class="btn btn-primary" style="font-size: 0.75rem; padding: 0.5rem 1rem;">Clothing</a>
-                    </div>
-                </div>
-            </aside>
-
-            <!-- Product Grid -->
-            <div class="product-listing">
-                <div class="grid grid-3">
-                    {% for product in products %}
-                        <div class="card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}">
-                            <a href="{{ product.get_absolute_url }}">
-                                <div style="position: relative; height: 300px; overflow: hidden;">
-                                    <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s;">
-                                    {% if product.hover_image %}
-                                        <img src="{{ product.hover_image.url }}" alt="{{ product.name }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s;" class="hover-img">
-                                    {% endif %}
-                                </div>
-                            </a>
-                            <div style="padding: 1.5rem; text-align: center;">
-                                <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">{{ product.name }}</h4>
-                                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">{{ product.short_description|truncatewords:10 }}</p>
-                                <div style="font-weight: 700; color: var(--primary); margin-bottom: 1rem;">
-                                    {% if product.discount_price %}
-                                        <span style="text-decoration: line-through; opacity: 0.5; font-weight: 400;">Rs {{ product.price }}</span>
-                                        <span style="color: #ef4444; margin-left: 10px;">Rs {{ product.discount_price }}</span>
-                                    {% else %}
-                                        Rs {{ product.price }}
-                                    {% endif %}
-                                </div>
-                                <a href="{{ product.get_absolute_url }}" class="btn btn-outline" style="width: 100%; font-size: 0.8rem;">View Details</a>
-                            </div>
-                        </div>
-                    {% empty %}
-                        <div style="grid-column: span 3; text-align: center; padding: 5rem 0;">
-                            <i class="fas fa-box-open" style="font-size: 3rem; color: var(--border); margin-bottom: 1rem;"></i>
-                            <h3>No products found in this category.</h3>
-                        </div>
+        <!-- Horizontal Filter Bar -->
+        <div class="filter-bar" style="background: white; padding: 1.2rem 2rem; border-radius: 12px; box-shadow: var(--shadow-sm); margin-bottom: 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <div class="filter-group" style="display: flex; align-items: center; gap: 1rem;">
+                <span style="font-weight: 700; color: var(--primary); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px;">Categories:</span>
+                <div class="category-pills" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <a href="{% url 'clothing:list' %}" class="pill {% if not category %}active{% endif %}">All</a>
+                    {% for cat in categories %}
+                        <a href="{% url 'clothing:category_detail' cat.slug %}" class="pill {% if category.id == cat.id %}active{% endif %}">{{ cat.name }}</a>
                     {% endfor %}
                 </div>
             </div>
+            
+            <div class="sort-group" style="display: flex; align-items: center; gap: 1rem;">
+                <span style="font-size: 0.9rem; color: var(--text-muted);">{{ products.count }} Items Found</span>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="grid grid-4" id="clothing-grid">
+            {% for product in products %}
+                <div class="premium-clothing-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:50 }}">
+                    <a href="{{ product.get_absolute_url }}" class="card-link" style="text-decoration: none;">
+                        <div class="p-img-wrapper" style="position: relative; aspect-ratio: 3/4; overflow: hidden; border-radius: 12px; background: #eee;">
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="main-img" style="width: 100%; height: 100%; object-fit: cover; transition: 0.8s cubic-bezier(0.4, 0, 0.2, 1);">
+                            {% if product.hover_image %}
+                                <img src="{{ product.hover_image.url }}" alt="{{ product.name }}" class="hover-img" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: 0.6s; transform: scale(1.1);">
+                            {% endif %}
+                            
+                            {% if product.discount_price %}
+                                <div class="badge-sale" style="position: absolute; top: 12px; left: 12px; background: #ef4444; color: white; padding: 4px 10px; border-radius: 4px; font-size: 0.65rem; font-weight: 800; z-index: 10; letter-spacing: 0.5px;">SALE</div>
+                            {% endif %}
+                            
+                            <div class="cat-tag" style="position: absolute; bottom: 12px; left: 12px; background: rgba(10, 37, 64, 0.85); backdrop-filter: blur(4px); color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.6rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">{{ product.category.name }}</div>
+                        </div>
+                        
+                        <div class="p-info" style="padding: 1.2rem 0.2rem; text-align: left;">
+                            <h3 style="font-size: 1rem; color: var(--primary); margin-bottom: 0.4rem; font-weight: 700; transition: 0.3s;">{{ product.name }}</h3>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.8rem; line-height: 1.4;">{{ product.short_description|truncatewords:8 }}</p>
+                            
+                            <div class="price-box" style="display: flex; align-items: center; gap: 8px;">
+                                {% if product.discount_price %}
+                                    <span style="font-size: 1rem; font-weight: 800; color: #ef4444;">Rs. {{ product.discount_price }}</span>
+                                    <span style="font-size: 0.85rem; text-decoration: line-through; opacity: 0.5;">Rs. {{ product.price }}</span>
+                                {% else %}
+                                    <span style="font-size: 1rem; font-weight: 800; color: var(--primary);">Rs. {{ product.price }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% empty %}
+                <div style="grid-column: span 4; text-align: center; padding: 4rem 0;">
+                    <div style="background: white; display: inline-block; padding: 3rem; border-radius: 20px; box-shadow: var(--shadow-sm);">
+                        <i class="fas fa-tshirt" style="font-size: 3rem; color: var(--border); margin-bottom: 1rem; display: block;"></i>
+                        <h2 style="color: var(--primary); font-size: 1.5rem;">No items found</h2>
+                        <a href="{% url 'clothing:list' %}" class="btn btn-outline" style="margin-top: 1.5rem; font-size: 0.8rem;">View All Collection</a>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 </section>
 
 <style>
-    .card:hover .hover-img { opacity: 1 !important; }
-    .card:hover img:not(.hover-img) { transform: scale(1.1); }
+    .pill {
+        padding: 6px 14px;
+        border-radius: 50px;
+        background: var(--bg-white);
+        border: 1px solid var(--border);
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        font-weight: 600;
+        transition: 0.3s;
+        text-decoration: none;
+    }
+    .pill:hover, .pill.active {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+        transform: translateY(-2px);
+    }
+
+    .premium-clothing-card { transition: 0.4s; }
+    .premium-clothing-card:hover .main-img { transform: scale(1.05); }
+    .premium-clothing-card:hover .hover-img { opacity: 1; transform: scale(1); }
+    .premium-clothing-card:hover h3 { color: var(--accent-dark); }
+
+    @media (max-width: 1200px) { .grid-4 { grid-template-columns: repeat(3, 1fr) !important; } }
+    @media (max-width: 992px) { 
+        .grid-4 { grid-template-columns: repeat(2, 1fr) !important; gap: 1.5rem !important; }
+        .filter-bar { justify-content: center; text-align: center; padding: 1rem; }
+    }
+    @media (max-width: 640px) { 
+        .grid-4 { grid-template-columns: 1fr !important; }
+        .clothing-hero { padding: 60px 0 40px; }
+        .filter-group { justify-content: center; }
+    }
 </style>
 {% endblock %}

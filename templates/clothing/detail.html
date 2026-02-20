@@ -5,190 +5,184 @@
 
 {% block meta_description %}{{ product.meta_description|default:product.short_description }}{% endblock %}
 
-{% block extra_head %}
-<!-- Structured Data -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org/",
-  "@type": "Product",
-  "name": "{{ product.name }}",
-  "image": "{{ request.scheme }}://{{ request.get_host }}{{ product.image.url }}",
-  "description": "{{ product.short_description }}",
-  "brand": {
-    "@type": "Brand",
-    "name": "{{ company_name }}"
-  },
-  "offers": {
-    "@type": "Offer",
-    "url": "{{ request.build_absolute_uri }}",
-    "priceCurrency": "PKR",
-    "price": "{{ product.discount_price|default:product.price }}",
-    "availability": "https://schema.org/{% if product.is_available %}InStock{% else %}OutOfStock{% endif %}"
-  }
-}
-</script>
-{% endblock %}
-
 {% block content %}
-<div class="breadcrumb-area" style="padding: 20px 0; background: #fff; border-bottom: 1px solid var(--border);">
+<div class="breadcrumb-area" style="padding: 25px 0; background: var(--bg-light); border-bottom: 1px solid var(--border);">
     <div class="container">
-        <nav style="font-size: 0.85rem; color: var(--text-muted);">
-            <a href="{% url 'core:home' %}">Home</a> &nbsp;/&nbsp;
-            <a href="{% url 'clothing:list' %}">Clothing</a> &nbsp;/&nbsp;
-            <a href="{% url 'clothing:category_detail' product.category.slug %}">{{ product.category.name }}</a> &nbsp;/&nbsp;
-            <span>{{ product.name }}</span>
+        <nav style="font-size: 0.9rem; color: var(--text-muted); font-weight: 500;">
+            <a href="{% url 'core:home' %}" style="color: var(--primary);">Home</a> 
+            <span style="margin: 0 10px; opacity: 0.5;">/</span>
+            <a href="{% url 'clothing:list' %}" style="color: var(--primary);">Clothing</a> 
+            <span style="margin: 0 10px; opacity: 0.5;">/</span>
+            <a href="{% url 'clothing:category_detail' product.category.slug %}" style="color: var(--primary);">{{ product.category.name }}</a> 
+            <span style="margin: 0 10px; opacity: 0.5;">/</span>
+            <span style="color: var(--accent-dark);">{{ product.name }}</span>
         </nav>
     </div>
 </div>
 
-<section class="section">
+<section class="section" style="padding: 60px 0; overflow-x: hidden;">
     <div class="container">
-        <div class="grid grid-2" style="gap: 4rem; align-items: start;">
-            <!-- Interactive Gallery -->
+        <div class="grid detail-main-grid" style="align-items: start;">
+            <!-- Premium Image Gallery -->
             <div class="product-gallery" data-aos="fade-right">
-                <div class="main-image-container card" style="height: 650px; margin-bottom: 1.5rem; overflow: hidden; position: relative; background: #f9f9f9; border: 1px solid var(--border);">
-                    <img id="mainImage" src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease-in-out;">
-                    {% if product.discount_price %}
-                    <div style="position: absolute; top: 20px; left: 20px; background: #ef4444; color: white; padding: 5px 15px; border-radius: 4px; font-weight: 700; font-size: 0.8rem; z-index: 5;">SALE</div>
-                    {% endif %}
+                <div class="main-image-wrapper" style="position: relative; cursor: zoom-in;">
+                    <div class="main-image-container" id="zoomContainer" style="aspect-ratio: 3/4; width: 100%; border-radius: 20px; overflow: hidden; position: relative; background: #fff; box-shadow: var(--shadow-md); border: 1px solid var(--border);">
+                        <img id="mainImage" src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.4s ease, transform 0.5s ease;">
+                        {% if product.discount_price %}
+                        <div class="premium-badge">SALE</div>
+                        {% endif %}
+                    </div>
                 </div>
                 
-                <div class="thumbnail-grid" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px;">
-                    <div class="thumb-item active" onclick="switchImage(this, '{{ product.image.url }}')">
-                        <img src="{{ product.image.url }}" style="width: 100%; height: 100px; object-fit: cover; cursor: pointer; border-radius: 4px; border: 2px solid var(--accent);">
+                <div class="thumbnail-row luxury-scroll">
+                    <div class="thumb-box active" onclick="switchImage(this, '{{ product.image.url }}')">
+                        <img src="{{ product.image.url }}">
                     </div>
                     {% if product.hover_image %}
-                    <div class="thumb-item" onclick="switchImage(this, '{{ product.hover_image.url }}')">
-                        <img src="{{ product.hover_image.url }}" style="width: 100%; height: 100px; object-fit: cover; cursor: pointer; border-radius: 4px; border: 2px solid transparent;">
+                    <div class="thumb-box" onclick="switchImage(this, '{{ product.hover_image.url }}')">
+                        <img src="{{ product.hover_image.url }}">
                     </div>
                     {% endif %}
                     {% if product.image_3 %}
-                    <div class="thumb-item" onclick="switchImage(this, '{{ product.image_3.url }}')">
-                        <img src="{{ product.image_3.url }}" style="width: 100%; height: 100px; object-fit: cover; cursor: pointer; border-radius: 4px; border: 2px solid transparent;">
+                    <div class="thumb-box" onclick="switchImage(this, '{{ product.image_3.url }}')">
+                        <img src="{{ product.image_3.url }}">
                     </div>
                     {% endif %}
                     {% if product.image_4 %}
-                    <div class="thumb-item" onclick="switchImage(this, '{{ product.image_4.url }}')">
-                        <img src="{{ product.image_4.url }}" style="width: 100%; height: 100px; object-fit: cover; cursor: pointer; border-radius: 4px; border: 2px solid transparent;">
+                    <div class="thumb-box" onclick="switchImage(this, '{{ product.image_4.url }}')">
+                        <img src="{{ product.image_4.url }}">
                     </div>
                     {% endif %}
                     {% if product.image_5 %}
-                    <div class="thumb-item" onclick="switchImage(this, '{{ product.image_5.url }}')">
-                        <img src="{{ product.image_5.url }}" style="width: 100%; height: 100px; object-fit: cover; cursor: pointer; border-radius: 4px; border: 2px solid transparent;">
+                    <div class="thumb-box" onclick="switchImage(this, '{{ product.image_5.url }}')">
+                        <img src="{{ product.image_5.url }}">
                     </div>
                     {% endif %}
                     {% if product.image_6 %}
-                    <div class="thumb-item" onclick="switchImage(this, '{{ product.image_6.url }}')">
-                        <img src="{{ product.image_6.url }}" style="width: 100%; height: 100px; object-fit: cover; cursor: pointer; border-radius: 4px; border: 2px solid transparent;">
+                    <div class="thumb-box" onclick="switchImage(this, '{{ product.image_6.url }}')">
+                        <img src="{{ product.image_6.url }}">
                     </div>
                     {% endif %}
                 </div>
             </div>
 
-            <script>
-                function switchImage(element, src) {
-                    const mainImage = document.getElementById('mainImage');
-                    mainImage.style.opacity = '0';
-                    setTimeout(() => {
-                        mainImage.src = src;
-                        mainImage.style.opacity = '1';
-                    }, 300);
-
-                    // Update active thumbnail
-                    document.querySelectorAll('.thumb-item img').forEach(img => {
-                        img.style.borderColor = 'transparent';
-                    });
-                    element.querySelector('img').style.borderColor = 'var(--accent)';
-                }
-            </script>
-
-            <!-- Content -->
-            <div class="product-info" data-aos="fade-left">
-                <h4 style="color: var(--accent-dark); text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 0.5rem; font-weight: 800;">{{ product.category.name }}</h4>
-                <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">{{ product.name }}</h1>
+            <!-- Product Purchase Info -->
+            <div class="product-purchase-box" data-aos="fade-left">
+                <div class="brand-eyebrow">{{ product.category.name }}</div>
                 
-                <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 2rem;">
+                <h1 class="luxury-title">{{ product.name }}</h1>
+                
+                <div class="luxury-price-box">
                     {% if product.discount_price %}
-                        <span style="text-decoration: line-through; opacity: 0.5; font-weight: 400; font-size: 1.2rem;">Rs {{ product.price }}</span>
-                        <span style="color: #ef4444; margin-left: 15px;">Rs {{ product.discount_price }}</span>
+                        <span class="current-price">Rs. {{ product.discount_price }}</span>
+                        <span class="old-price">Rs. {{ product.price }}</span>
                     {% else %}
-                        Rs {{ product.price }}
+                        <span class="current-price">Rs. {{ product.price }}</span>
                     {% endif %}
                 </div>
 
-                <div style="margin-bottom: 2rem; border-left: 4px solid var(--accent); padding-left: 1.5rem;">
-                    <p style="font-size: 1.1rem; line-height: 1.8;">{{ product.short_description }}</p>
+                <div class="luxury-desc-border">
+                    <p>{{ product.short_description }}</p>
                 </div>
 
-                <div style="margin-bottom: 2rem;">
-                    <h3 style="font-size: 1rem; margin-bottom: 1rem;">Available Sizes:</h3>
-                    <div style="display: flex; gap: 10px;">
-                        {% for size in product.sizes.all %}
-                            <span style="padding: 10px 15px; border: 1px solid var(--border); border-radius: 4px; font-weight: 600; font-size: 0.9rem;">{{ size.name }}</span>
-                        {% endfor %}
-                    </div>
-                </div>
-
-                <div style="margin-bottom: 2rem;">
-                    <h3 style="font-size: 1rem; margin-bottom: 1rem;">Colors:</h3>
-                    <div style="display: flex; gap: 15px;">
-                        {% for color in product.colors.all %}
-                            <div style="text-align: center;">
-                                <div style="width: 30px; height: 30px; border-radius: 50%; background: {{ color.hex_code }}; border: 2px solid {% if color.hex_code == '#FFFFFF' %}var(--border){% else %}{{ color.hex_code }}{% endif %}; margin: 0 auto 5px;"></div>
-                                <span style="font-size: 0.75rem; color: var(--text-muted);">{{ color.name }}</span>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-
-                <form action="{% url 'inquiries:add_to_quote' product.id %}" method="POST">
+                <form action="{% url 'inquiries:add_to_quote' product.id %}" method="POST" class="purchase-form-luxury">
                     {% csrf_token %}
                     <input type="hidden" name="type" value="clothing">
                     <input type="hidden" name="product_id" value="{{ product.id }}">
-                    <div style="display: flex; gap: 1rem;">
-                        <input type="number" name="quantity" value="1" min="1" style="width: 80px; padding: 10px; border: 1px solid var(--border); border-radius: 4px;">
-                        <button type="submit" class="btn btn-primary" style="flex: 1;">
-                            <i class="fas fa-plus"></i> Add to Inquiry
-                        </button>
+                    
+                    <!-- Size Selector Boutique style -->
+                    <div class="selector-section">
+                        <label class="section-label">SELECT SIZE</label>
+                        <div class="size-tiles">
+                            {% for size in product.sizes.all %}
+                                <div class="size-tile" onclick="selectSize(this, '{{ size.name }}')">{{ size.name }}</div>
+                            {% endfor %}
+                        </div>
+                        <input type="hidden" name="size" id="selectedSize" required>
                     </div>
+
+                    <div class="selector-section">
+                        <label class="section-label">QUANTITY</label>
+                        <div class="qty-stepper">
+                            <button type="button" onclick="changeQty(-1)">-</button>
+                            <input type="number" name="quantity" id="qtyInput" value="1" min="1" readonly>
+                            <button type="button" onclick="changeQty(1)">+</button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-luxury-cta">
+                        <i class="fas fa-plus-circle"></i> ADD TO QUOTE LIST
+                    </button>
                 </form>
+
+                <!-- Value Proposition Icons -->
+                <div class="trust-icons-luxury">
+                    <div class="trust-item">
+                        <div class="icon-circle"><i class="fas fa-gem"></i></div>
+                        <span>Premium Quality</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="icon-circle"><i class="fas fa-shipping-fast"></i></div>
+                        <span>Global Shipping</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="icon-circle"><i class="fas fa-undo"></i></div>
+                        <span>Easy Returns</span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div style="margin-top: 5rem;" data-aos="fade-up">
-            <h2 style="margin-bottom: 2rem;">Product Details</h2>
-            <div style="background: white; padding: 3rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
-                <div style="margin-bottom: 2rem;">
-                    <h3 style="font-size: 1.2rem; margin-bottom: 1rem; color: var(--primary);">Description</h3>
-                    <p>{{ product.full_description|linebreaks }}</p>
+        <!-- Sticky Mobile CTA -->
+        <div class="sticky-cta-mobile">
+            <div class="container">
+                <div class="sticky-content">
+                    <div class="sticky-price">Rs. {{ product.discount_price|default:product.price }}</div>
+                    <button type="button" onclick="document.querySelector('.btn-luxury-cta').click()" class="btn-sticky">ADD TO QUOTE</button>
                 </div>
-                <div class="grid grid-2">
-                    <div>
-                        <h3 style="font-size: 1.2rem; margin-bottom: 1rem; color: var(--primary);">Material</h3>
-                        <p>{{ product.material }}</p>
+            </div>
+        </div>
+
+        <!-- Detailed Specifications -->
+        <div class="detail-tabs-luxury" data-aos="fade-up">
+            <div class="luxury-tabs-header">
+                <h2 class="active-tab">Product Specifications</h2>
+            </div>
+            
+            <div class="spec-grid-luxury">
+                <div class="spec-card-luxury">
+                    <div class="card-head"><i class="fas fa-info-circle"></i> OVERVIEW</div>
+                    <div class="card-body">
+                        {{ product.full_description|linebreaks }}
                     </div>
-                    <div>
-                        <h3 style="font-size: 1.2rem; margin-bottom: 1rem; color: var(--primary);">Key Features</h3>
-                        <p>{{ product.features|linebreaks }}</p>
+                </div>
+                
+                <div class="spec-card-luxury">
+                    <div class="card-head"><i class="fas fa-list-check"></i> DETAILS</div>
+                    <div class="details-list">
+                        <div class="detail-row"><strong>Material:</strong> {{ product.material }}</div>
+                        <div class="detail-row"><strong>Category:</strong> {{ product.category.name }}</div>
+                        <div class="features-box">
+                            <strong>Key Features:</strong>
+                            {{ product.features|linebreaks }}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         {% if related_products %}
-        <div style="margin-top: 5rem;">
-            <h2 style="margin-bottom: 2rem; text-align: center;">You May Also Like</h2>
-            <div class="grid grid-4">
+        <div class="related-section-luxury">
+            <h2 class="section-title-luxury">You May Also Like</h2>
+            <div class="grid grid-4 luxury-grid">
                 {% for related in related_products %}
-                <div class="card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}">
+                <div class="clothing-card-luxury" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}">
                     <a href="{{ related.get_absolute_url }}">
-                        <div style="height: 250px; overflow: hidden;">
-                            <img src="{{ related.image.url }}" style="width: 100%; height: 100%; object-fit: cover;">
+                        <div class="card-img">
+                            <img src="{{ related.image.url }}">
+                            <div class="price-tag">Rs. {{ related.price }}</div>
                         </div>
-                        <div style="padding: 1rem; text-align: center;">
-                            <h4 style="font-size: 0.9rem;">{{ related.name }}</h4>
-                            <p style="color: var(--accent-dark); font-weight: 700; margin-top: 0.5rem;">Rs {{ related.price }}</p>
-                        </div>
+                        <h3>{{ related.name }}</h3>
                     </a>
                 </div>
                 {% endfor %}
@@ -197,4 +191,148 @@
         {% endif %}
     </div>
 </section>
+
+<style>
+    /* Luxury Typography & Basics */
+    .brand-eyebrow { color: var(--accent); font-weight: 800; text-transform: uppercase; letter-spacing: 3px; font-size: 0.75rem; margin-bottom: 0.8rem; }
+    .luxury-title { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; color: var(--primary); letter-spacing: -2px; line-height: 1.1; margin-bottom: 1.5rem; }
+    .luxury-price-box { margin-bottom: 2.5rem; }
+    .current-price { font-size: 2.2rem; font-weight: 800; color: var(--primary); }
+    .old-price { font-size: 1.2rem; text-decoration: line-through; opacity: 0.4; margin-left: 15px; }
+    .luxury-desc-border { border-left: 4px solid var(--accent); padding-left: 2rem; margin-bottom: 3rem; font-size: 1.15rem; color: var(--text-muted); line-height: 1.8; }
+
+    /* Premium Badge */
+    .premium-badge { position: absolute; top: 30px; left: 30px; background: #ef4444; color: white; padding: 8px 20px; border-radius: 50px; font-weight: 900; font-size: 0.8rem; letter-spacing: 1px; box-shadow: 0 10px 20px rgba(239, 68, 68, 0.4); z-index: 10; }
+
+    /* Gallery Thumbnails */
+    .luxury-scroll { display: flex; gap: 15px; margin-top: 25px; overflow-x: auto; padding: 5px 5px 15px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+    .luxury-scroll::-webkit-scrollbar { display: none; }
+    .thumb-box { width: 90px; aspect-ratio: 3/4; border-radius: 12px; overflow: hidden; cursor: pointer; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 2px solid transparent; flex-shrink: 0; opacity: 0.5; }
+    .thumb-box img { width: 100%; height: 100%; object-fit: cover; }
+    .thumb-box:hover, .thumb-box.active { opacity: 1; border-color: var(--accent); transform: scale(1.05) translateY(-5px); }
+
+    /* Boutique Selectors */
+    .selector-section { margin-bottom: 2rem; }
+    .section-label { display: block; font-size: 0.75rem; font-weight: 900; color: var(--primary); letter-spacing: 1.5px; margin-bottom: 15px; }
+    .size-tiles { display: flex; gap: 12px; flex-wrap: wrap; }
+    .size-tile { padding: 12px 25px; border: 2px solid var(--border); border-radius: 12px; cursor: pointer; font-weight: 700; transition: 0.3s; color: var(--text-muted); }
+    .size-tile:hover { border-color: var(--accent); color: var(--primary); }
+    .size-tile.active { background: var(--primary); border-color: var(--primary); color: white; box-shadow: 0 10px 20px rgba(10, 37, 64, 0.2); }
+
+    .qty-stepper { display: flex; align-items: center; background: #f4f6f9; border-radius: 12px; width: fit-content; padding: 5px; }
+    .qty-stepper button { width: 40px; height: 40px; border: none; background: white; border-radius: 8px; font-weight: 800; cursor: pointer; transition: 0.2s; box-shadow: var(--shadow-sm); }
+    .qty-stepper input { border: none; background: transparent; width: 60px; text-align: center; font-weight: 800; font-size: 1.1rem; }
+
+    /* Luxury CTA */
+    .btn-luxury-cta { width: 100%; padding: 22px; background: var(--primary); color: white; border: none; border-radius: 15px; font-weight: 800; font-size: 1.1rem; letter-spacing: 1px; cursor: pointer; transition: 0.4s; display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: 1rem; box-shadow: 0 15px 35px rgba(10, 37, 64, 0.2); }
+    .btn-luxury-cta:hover { transform: translateY(-5px); background: #0c355c; box-shadow: 0 20px 45px rgba(10, 37, 64, 0.3); }
+
+    /* Trust Icons */
+    .trust-icons-luxury { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+    .trust-item { text-align: center; }
+    .icon-circle { width: 50px; height: 50px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; color: var(--accent); font-size: 1.2rem; box-shadow: var(--shadow-sm); }
+    .trust-item span { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* Specifications */
+    .detail-tabs-luxury { margin-top: 100px; }
+    .luxury-tabs-header { border-bottom: 2px solid var(--border); margin-bottom: 40px; text-align: center; }
+    .active-tab { display: inline-block; padding: 15px 40px; font-size: 1.8rem; font-weight: 900; color: var(--primary); position: relative; }
+    .active-tab::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 4px; background: var(--accent); border-radius: 2px; }
+    .spec-grid-luxury { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+    .spec-card-luxury { background: white; border-radius: 25px; padding: 3rem; box-shadow: var(--shadow-sm); border: 1px solid var(--border); }
+    .card-head { font-weight: 800; color: var(--primary); font-size: 1.1rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 12px; }
+    .card-head i { color: var(--accent); }
+    .detail-row { padding: 12px 0; border-bottom: 1px solid #f0f0f0; font-size: 1rem; }
+    .features-box { margin-top: 1.5rem; line-height: 1.8; }
+
+    /* Sticky CTA Mobile */
+    .sticky-cta-mobile { position: fixed; bottom: 0; left: 0; width: 100%; background: white; padding: 15px 0; box-shadow: 0 -10px 30px rgba(0,0,0,0.1); z-index: 1000; transform: translateY(100%); transition: 0.4s; display: none; }
+    .sticky-cta-mobile.visible { transform: translateY(0); }
+    .sticky-content { display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+    .sticky-price { font-size: 1.3rem; font-weight: 900; color: var(--primary); }
+    .btn-sticky { flex: 1; padding: 15px; background: var(--primary); color: white; border: none; border-radius: 10px; font-weight: 800; }
+
+    .detail-main-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4rem; }
+
+    @media (max-width: 1200px) { .detail-main-grid { gap: 2rem; } }
+
+    @media (max-width: 992px) {
+        .detail-main-grid { grid-template-columns: 1fr; gap: 0; }
+        .spec-grid-luxury { grid-template-columns: 1fr; gap: 20px; }
+        .sticky-cta-mobile { display: block; }
+        .product-purchase-box { 
+            background: white; 
+            padding: 1.5rem 1rem; 
+            border-radius: 20px; 
+            margin: -30px 0 0; 
+            position: relative; 
+            z-index: 5; 
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .main-image-container { border-radius: 0 0 20px 20px; }
+        .product-gallery { margin: 0; width: 100%; overflow: hidden; }
+        .luxury-scroll { padding-left: 15px; padding-right: 15px; }
+        .btn-luxury-cta { font-size: 0.95rem; padding: 18px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    }
+    
+    @media (max-width: 640px) {
+        .luxury-title { font-size: 1.8rem; line-height: 1.2; }
+        .current-price { font-size: 1.8rem; }
+        .luxury-desc-border { padding-left: 1rem; font-size: 1rem; margin-bottom: 2rem; }
+        .trust-icons-luxury { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .spec-card-luxury { padding: 1.5rem; }
+        .active-tab { font-size: 1.4rem; padding: 10px 20px; }
+    }
+</style>
+
+<script>
+    function switchImage(element, src) {
+        const mainImage = document.getElementById('mainImage');
+        mainImage.style.opacity = '0';
+        setTimeout(() => {
+            mainImage.src = src;
+            mainImage.style.opacity = '1';
+        }, 200);
+        document.querySelectorAll('.thumb-box').forEach(box => box.classList.remove('active'));
+        element.classList.add('active');
+    }
+
+    function selectSize(element, size) {
+        document.querySelectorAll('.size-tile').forEach(tile => tile.classList.remove('active'));
+        element.classList.add('active');
+        document.getElementById('selectedSize').value = size;
+    }
+
+    function changeQty(amt) {
+        const input = document.getElementById('qtyInput');
+        const newVal = Math.max(1, parseInt(input.value) + amt);
+        input.value = newVal;
+    }
+
+    // Zoom on Hover
+    const container = document.getElementById('zoomContainer');
+    const img = document.getElementById('mainImage');
+    container.addEventListener('mousemove', (e) => {
+        const { left, top, width, height } = container.getBoundingClientRect();
+        const x = ((e.clientX - left) / width) * 100;
+        const y = ((e.clientY - top) / height) * 100;
+        img.style.transformOrigin = `${x}% ${y}%`;
+        img.style.transform = "scale(2)";
+    });
+    container.addEventListener('mouseleave', () => {
+        img.style.transform = "scale(1)";
+    });
+
+    // Sticky CTA Visibility
+    window.addEventListener('scroll', () => {
+        const cta = document.querySelector('.sticky-cta-mobile');
+        if (window.scrollY > 500) {
+            cta.classList.add('visible');
+        } else {
+            cta.classList.remove('visible');
+        }
+    });
+</script>
 {% endblock %}
