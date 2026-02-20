@@ -1,4 +1,5 @@
 from products.models import Product
+from clothing.models import ClothingProduct
 
 class QuoteCart:
     def __init__(self, request):
@@ -8,46 +9,60 @@ class QuoteCart:
             cart = self.session['quote_cart'] = {}
         self.cart = cart
 
-    def add(self, product_id):
-        product_id = str(product_id)
-        if product_id not in self.cart:
-            self.cart[product_id] = {'quantity': 1}
+    def add(self, product_id, product_type='chemical'):
+        item_key = f"{product_type}_{product_id}"
+        if item_key not in self.cart:
+            self.cart[item_key] = {
+                'id': product_id,
+                'type': product_type,
+                'quantity': 1
+            }
         else:
-            self.cart[product_id]['quantity'] += 1
+            self.cart[item_key]['quantity'] += 1
         self.save()
 
-    def update(self, product_id, quantity):
-        product_id = str(product_id)
-        if product_id in self.cart:
+    def update(self, item_key, quantity):
+        if item_key in self.cart:
             if quantity > 0:
-                self.cart[product_id]['quantity'] = int(quantity)
+                self.cart[item_key]['quantity'] = int(quantity)
             else:
-                self.remove(product_id)
+                self.remove(item_key)
             self.save()
 
-    def remove(self, product_id):
-        product_id = str(product_id)
-        if product_id in self.cart:
-            del self.cart[product_id]
+    def remove(self, item_key):
+        if item_key in self.cart:
+            del self.cart[item_key]
             self.save()
 
     def save(self):
         self.session.modified = True
 
     def get_items(self):
-        product_ids = self.cart.keys()
-        products = Product.objects.filter(id__in=product_ids)
         items = []
-        for product in products:
-            items.append({
-                'product': product,
-                'quantity': self.cart[str(product.id)]['quantity']
-            })
+        for key, value in self.cart.items():
+            if value['type'] == 'chemical':
+                product = Product.objects.filter(id=value['id']).first()
+                if product:
+                    items.append({
+                        'key': key,
+                        'product': product,
+                        'type': 'chemical',
+                        'quantity': value['quantity']
+                    })
+            elif value['type'] == 'clothing':
+                product = ClothingProduct.objects.filter(id=value['id']).first()
+                if product:
+                    items.append({
+                        'key': key,
+                        'product': product,
+                        'type': 'clothing',
+                        'quantity': value['quantity']
+                    })
         return items
     
     def clear(self):
-        del self.session['quote_cart']
+        self.session['quote_cart'] = {}
         self.save()
     
     def __len__(self):
-        return len(self.cart)
+        return sum(item['quantity'] for item in self.cart.values())

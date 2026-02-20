@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {% if category %}{{ category.name }}{% else %}Premium Clothing Collection{% endif %} | {{ company_name }}
+{% endblock %}
+
+{% block meta_description %}
+    {% if category %}{{ category.meta_description|default:category.description }}{% else %}Explore our premium collection of Workwear, GymWear, CasualWear, and Streetwear at Nasim and Son.{% endif %}
+{% endblock %}
+
+{% block content %}
+<!-- Breadcrumbs -->
+<div class="breadcrumb-area" style="padding: 20px 0; background: #fff; border-bottom: 1px solid var(--border);">
+    <div class="container">
+        <nav style="font-size: 0.85rem; color: var(--text-muted);">
+            <a href="{% url 'core:home' %}">Home</a> &nbsp;/&nbsp;
+            <a href="{% url 'clothing:list' %}">Clothing</a>
+            {% if category %}
+                &nbsp;/&nbsp; <span>{{ category.name }}</span>
+            {% endif %}
+        </nav>
+    </div>
+</div>
+
+<section class="page-hero">
+    <div class="container">
+        <h1 data-aos="fade-up">{% if category %}{{ category.name }}{% else %}Premium Clothing Line{% endif %}</h1>
+        <p data-aos="fade-up" data-aos-delay="100">
+            {% if category %}{{ category.description }}{% else %}Engineered for durability, designed for style.{% endif %}
+        </p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="grid" style="grid-template-columns: 250px 1fr; gap: 3rem;">
+            <!-- Filters Sidebar -->
+            <aside class="filters-sidebar">
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="font-size: 1.1rem; margin-bottom: 1rem; border-bottom: 2px solid var(--accent); display: inline-block;">Categories</h3>
+                    <ul style="margin-top: 1rem;">
+                        <li style="margin-bottom: 0.5rem;"><a href="{% url 'clothing:list' %}" style="{% if not category %}color: var(--accent-dark); font-weight: 700;{% endif %}">All Clothing</a></li>
+                        {% for cat in categories %}
+                            <li style="margin-bottom: 0.5rem;">
+                                <a href="{% url 'clothing:category_detail' cat.slug %}" style="{% if category.id == cat.id %}color: var(--accent-dark); font-weight: 700;{% endif %}">{{ cat.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="font-size: 1.1rem; margin-bottom: 1rem; border-bottom: 2px solid var(--accent); display: inline-block;">Filter by Type</h3>
+                    <div style="margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                        <a href="{% url 'products:landing' %}" class="btn btn-outline" style="font-size: 0.75rem; padding: 0.5rem 1rem;">Chemicals</a>
+                        <a href="{% url 'clothing:list' %}" class="btn btn-primary" style="font-size: 0.75rem; padding: 0.5rem 1rem;">Clothing</a>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Product Grid -->
+            <div class="product-listing">
+                <div class="grid grid-3">
+                    {% for product in products %}
+                        <div class="card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}">
+                            <a href="{{ product.get_absolute_url }}">
+                                <div style="position: relative; height: 300px; overflow: hidden;">
+                                    <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s;">
+                                    {% if product.hover_image %}
+                                        <img src="{{ product.hover_image.url }}" alt="{{ product.name }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s;" class="hover-img">
+                                    {% endif %}
+                                </div>
+                            </a>
+                            <div style="padding: 1.5rem; text-align: center;">
+                                <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">{{ product.name }}</h4>
+                                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">{{ product.short_description|truncatewords:10 }}</p>
+                                <div style="font-weight: 700; color: var(--primary); margin-bottom: 1rem;">
+                                    {% if product.discount_price %}
+                                        <span style="text-decoration: line-through; opacity: 0.5; font-weight: 400;">Rs {{ product.price }}</span>
+                                        <span style="color: #ef4444; margin-left: 10px;">Rs {{ product.discount_price }}</span>
+                                    {% else %}
+                                        Rs {{ product.price }}
+                                    {% endif %}
+                                </div>
+                                <a href="{{ product.get_absolute_url }}" class="btn btn-outline" style="width: 100%; font-size: 0.8rem;">View Details</a>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div style="grid-column: span 3; text-align: center; padding: 5rem 0;">
+                            <i class="fas fa-box-open" style="font-size: 3rem; color: var(--border); margin-bottom: 1rem;"></i>
+                            <h3>No products found in this category.</h3>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .card:hover .hover-img { opacity: 1 !important; }
+    .card:hover img:not(.hover-img) { transform: scale(1.1); }
+</style>
+{% endblock %}

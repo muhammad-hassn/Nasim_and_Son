@@ -41,6 +41,10 @@ class Product(SEOModel):
     benefits = models.TextField(blank=True)
     technical_specs = models.TextField(blank=True, help_text="Table or list of specs")
     
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    discount_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    is_available = models.BooleanField(default=True)
+    
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

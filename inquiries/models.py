@@ -15,8 +15,17 @@ class Inquiry(models.Model):
 
 class InquiryItem(models.Model):
     inquiry = models.ForeignKey(Inquiry, related_name='items', on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, blank=True)
+    clothing_product = models.ForeignKey('clothing.ClothingProduct', on_delete=models.CASCADE, null=True, blank=True)
     quantity = models.PositiveIntegerField(default=1)
 
+    @property
+    def item_name(self):
+        if self.product:
+            return self.product.name
+        elif self.clothing_product:
+            return self.clothing_product.name
+        return "Unknown Item"
+
     def __str__(self):
-        return f"{self.product.name} ({self.quantity})"
+        return f"{self.item_name} ({self.quantity})"

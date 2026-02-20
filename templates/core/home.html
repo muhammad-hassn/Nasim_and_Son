@@ -125,12 +125,35 @@
     </div>
 </section>
 
-<!-- Product Categories -->
+<!-- Sector Introduction -->
+<section class="section" style="background: var(--bg-light); padding-top: 120px;">
+    <div class="container">
+        <div class="grid grid-2" style="gap: 4rem; align-items: center;">
+            <div data-aos="fade-right">
+                <h2 style="font-size: 2.8rem; margin-bottom: 2rem;">A Dual Legacy of <span style="color: var(--accent-dark);">Industrial Excellence</span></h2>
+                <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 2rem;">
+                    From advanced chemical formulations to premium protective and performance apparel, Nasim and Sons provides integrated solutions for modern industries. We bridge the gap between technical science and daily operational needs.
+                </p>
+                <div style="display: flex; gap: 1.5rem;">
+                    <a href="{% url 'products:landing' %}" class="btn btn-primary">Chemical Division</a>
+                    <a href="{% url 'clothing:list' %}" class="btn btn-outline">Clothing Division</a>
+                </div>
+            </div>
+            <div data-aos="fade-left">
+                <div class="card" style="padding: 0; overflow: hidden; border: none; box-shadow: var(--shadow-lg);">
+                    <img src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=1000&q=80" style="width: 100%; height: 400px; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Chemical Categories -->
 <section class="section">
     <div class="container">
-        <div style="text-align: center; margin-bottom: 4rem;" data-aos="fade-up">
-            <h4 style="color: var(--accent-dark); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 0.5rem;">Our Catalog</h4>
-            <h2 style="font-size: 2.5rem;">Core Product Categories</h2>
+        <div style="margin-bottom: 4rem;" data-aos="fade-up">
+            <h4 style="color: var(--accent-dark); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 0.5rem;">Science & Innovation</h4>
+            <h2 style="font-size: 2.5rem;">Industrial Chemical Solutions</h2>
         </div>
         
         <div class="grid grid-3">
@@ -144,19 +167,45 @@
                 <div style="margin-top: 2rem; color: var(--accent-dark); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">
                     View Products <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
                 </div>
-                <style>
-                    .card:hover div i { transform: scale(1.1); color: var(--accent); }
-                    .card:hover div { background: var(--primary); }
-                </style>
             </a>
             {% endfor %}
         </div>
+    </div>
+</section>
+
+<!-- Clothing Collection -->
+<section class="section" style="background: var(--bg-white); border-top: 1px solid var(--border);">
+    <div class="container">
+        <div style="text-align: right; margin-bottom: 4rem;" data-aos="fade-up">
+            <h4 style="color: var(--accent-dark); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 0.5rem;">Apparel & Performance</h4>
+            <h2 style="font-size: 2.5rem;">Premium Clothing Line</h2>
+        </div>
         
+        <div class="grid grid-4">
+            {% for item in featured_clothing %}
+            <div class="card clothing-home-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}">
+                <a href="{{ item.get_absolute_url }}">
+                    <div style="height: 300px; overflow: hidden; position: relative;">
+                        <img src="{{ item.image.url }}" style="width: 100%; height: 100%; object-fit: cover; transition: 0.5s;">
+                    </div>
+                </a>
+                <div style="padding: 1.5rem; text-align: center;">
+                    <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">{{ item.name }}</h4>
+                    <p style="color: var(--accent-dark); font-weight: 800;">Rs {{ item.price }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
         <div style="text-align: center; margin-top: 4rem;">
-            <a href="{% url 'products:landing' %}" class="btn btn-outline">Browse Full Range</a>
+            <a href="{% url 'clothing:list' %}" class="btn btn-outline" style="min-width: 250px;">Browse Clothing Store</a>
         </div>
     </div>
 </section>
+
+<style>
+    .clothing-home-card:hover img { transform: scale(1.1); }
+</style>
 
 <!-- Why Choose Us -->
 <section class="section" style="background-color: var(--primary); color: white;">

@@ -2,15 +2,20 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from inquiries.models import Inquiry
 from products.models import Category, Product
+from clothing.models import ClothingCategory, ClothingProduct
 from blog.models import BlogPost
 
 def home(request):
     categories = Category.objects.all()[:6]
+    clothing_categories = ClothingCategory.objects.all()[:4]
     featured_products = Product.objects.filter(is_active=True)[:4]
+    featured_clothing = ClothingProduct.objects.filter(is_active=True)[:4]
     latest_posts = BlogPost.objects.filter(is_published=True).order_by('-created_at')[:3]
     return render(request, 'core/home.html', {
         'categories': categories,
+        'clothing_categories': clothing_categories,
         'featured_products': featured_products,
+        'featured_clothing': featured_clothing,
         'latest_posts': latest_posts
     })
 

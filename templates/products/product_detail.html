@@ -3,6 +3,30 @@
 
 {% block title %}{{ product.name }} | {{ company_name }}{% endblock %}
 
+{% block extra_head %}
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": "{{ product.name }}",
+  "image": "{{ request.scheme }}://{{ request.get_host }}{{ product.image.url }}",
+  "description": "{{ product.short_description }}",
+  "brand": {
+    "@type": "Brand",
+    "name": "{{ company_name }}"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "{{ request.build_absolute_uri }}",
+    "priceCurrency": "PKR",
+    "price": "{{ product.discount_price|default:product.price|default:'0' }}",
+    "availability": "https://schema.org/{% if product.is_available %}InStock{% else %}OutOfStock{% endif %}"
+  }
+}
+</script>
+{% endblock %}
+
 {% block content %}
 <!-- Page Hero / Breadcrumb -->
 <section class="page-hero" style="padding: 100px 0 40px;">
@@ -52,7 +76,16 @@
                 <span style="color: var(--accent-dark); font-weight: 800; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px;">{{ product.category.name }}</span>
                 <h1 style="font-size: 3rem; margin-top: 0.5rem; margin-bottom: 1.5rem; line-height: 1.2;">{{ product.name }}</h1>
                 
-                <p style="font-size: 1.15rem; color: var(--text-muted); margin-bottom: 2.5rem; line-height: 1.8;">{{ product.short_description }}</p>
+                <p style="font-size: 1.15rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.8;">{{ product.short_description }}</p>
+
+                <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 2rem;">
+                    {% if product.discount_price %}
+                        <span style="text-decoration: line-through; opacity: 0.5; font-weight: 400; font-size: 1.2rem;">Rs {{ product.price }}</span>
+                        <span style="color: #ef4444; margin-left: 15px;">Rs {{ product.discount_price }}</span>
+                    {% elif product.price %}
+                        Rs {{ product.price }}
+                    {% endif %}
+                </div>
                 
                 <div style="background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 2.5rem; margin-bottom: 3rem; box-shadow: var(--shadow-sm);">
                     <h4 style="margin-bottom: 1rem; color: var(--primary);">Quick Specs</h4>
@@ -73,9 +106,13 @@
                 </div>
 
                 <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
-                    <a href="{% url 'inquiries:add_to_quote' product.id %}" class="btn btn-primary" style="padding: 1.25rem 3.5rem; font-size: 1rem;">
-                        <i class="fas fa-plus" style="margin-right: 10px;"></i> Add to Quote List
-                    </a>
+                    <form action="{% url 'inquiries:add_to_quote' product.id %}" method="POST" style="display: contents;">
+                        {% csrf_token %}
+                        <input type="hidden" name="type" value="chemical">
+                        <button type="submit" class="btn btn-primary" style="padding: 1.25rem 3.5rem; font-size: 1rem;">
+                            <i class="fas fa-plus" style="margin-right: 10px;"></i> Add to Quote List
+                        </button>
+                    </form>
                     <a href="{% url 'core:contact' %}" class="btn btn-outline" style="padding: 1.25rem 2.5rem;">
                         <i class="far fa-envelope" style="margin-right: 10px;"></i> Contact Sales
                     </a>

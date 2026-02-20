@@ -5,6 +5,11 @@ from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
 from .sitemaps import StaticViewSitemap, ProductSitemap, CategorySitemap, BlogSitemap
 
+# Admin Site Customization
+admin.site.site_header = "Nasim and Son Administrator"
+admin.site.site_title = "Nasim and Son Admin Portal"
+admin.site.index_title = "Welcome to Nasim and Son Management"
+
 sitemaps = {
     'static': StaticViewSitemap,
     'products': ProductSitemap,
@@ -16,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
     path('product/', include('products.urls')),
+    path('clothing/', include('clothing.urls')),
     path('blog/', include('blog.urls')),
     path('inquiry/', include('inquiries.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
