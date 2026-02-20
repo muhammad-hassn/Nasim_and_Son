@@ -7,25 +7,26 @@
 <!-- Hero Section -->
 <section class="home-hero">
     <div class="container" style="position: relative; z-index: 2;">
-        <div class="hero-content" data-aos="fade-right">
+        <div class="hero-content" data-aos="fade-up">
             <span class="hero-badge">
-                Leading Industrial Chemistry
+                Since 1998 | Industrial Leadership
             </span>
             <h1 class="hero-title">
-                Precision Formulae for <span style="color: var(--accent);">Global Progress.</span>
+                Technical Excellence. <br><span style="color: var(--accent);">Industrial Performance.</span>
             </h1>
             <p class="hero-description">
-                Nasim and Sons delivers ZDHC-certified, high-performance chemical solutions that drive efficiency across the manufacturing sector.
+                Nasim and Sons delivers world-class chemical formulations and premium industrial apparel. We empower global manufacturing with precision-engineered solutions and certified quality.
             </p>
             <div class="hero-actions">
-                <a href="{% url 'products:landing' %}" class="btn btn-accent">Explore Catalog</a>
-                <a href="{% url 'inquiries:quote_list' %}" class="btn btn-outline" style="border-color: white; color: white;">Get a Quote</a>
+                <a href="{% url 'products:landing' %}" class="btn btn-accent">Explore Divisions</a>
+                <a href="{% url 'inquiries:quote_list' %}" class="btn btn-outline" style="border-color: white; color: white;">Request a Quote</a>
             </div>
         </div>
     </div>
     
-    <!-- Abstract Shapes / Visuals -->
+    <!-- Abstract Visual Component -->
     <div class="hero-visual"></div>
+    <div class="hero-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.15) 0%, transparent 50%); pointer-events: none;"></div>
 </section>
 
 <style>
@@ -35,137 +36,201 @@
         min-height: 100vh;
         display: flex;
         align-items: center;
-        background: linear-gradient(rgba(10, 37, 64, 0.85), rgba(10, 37, 64, 0.75)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=2000&q=80');
+        background: linear-gradient(rgba(10, 37, 64, 0.9), rgba(10, 37, 64, 0.8)), url('https://images.unsplash.com/photo-1574634534894-89d7576c8259?auto=format&fit=crop&w=2000&q=80');
         background-size: cover;
         background-position: center;
         color: white;
-        padding: 100px 0 60px; /* Replaced padding-top with standard padding */
+        padding: 120px 0 80px;
     }
 
-    .hero-content { max-width: 800px; }
+    .hero-content { max-width: 850px; }
     
     .hero-badge {
         display: inline-block;
-        padding: 8px 18px;
-        background: var(--accent);
-        color: var(--primary);
+        padding: 10px 20px;
+        background: rgba(0, 212, 255, 0.1);
+        border: 1px solid var(--accent);
+        color: var(--accent);
         font-weight: 800;
-        font-size: 0.8rem;
-        border-radius: 4px;
-        margin-bottom: 2rem;
+        font-size: 0.75rem;
+        border-radius: 50px;
+        margin-bottom: 2.5rem;
         text-transform: uppercase;
-        letter-spacing: 2px;
+        letter-spacing: 3px;
     }
 
     .hero-title {
         color: white;
-        font-size: clamp(2.5rem, 8vw, 4.5rem);
-        line-height: 1.1;
-        margin-bottom: 1.5rem;
+        font-size: clamp(3rem, 10vw, 5rem);
+        line-height: 1;
+        margin-bottom: 2rem;
         font-weight: 800;
+        letter-spacing: -2px;
     }
 
     .hero-description {
         font-size: clamp(1.1rem, 3vw, 1.4rem);
-        opacity: 0.9;
-        margin-bottom: 3.5rem;
+        opacity: 0.85;
+        margin-bottom: 4rem;
         line-height: 1.6;
-        max-width: 650px;
+        max-width: 700px;
+        font-weight: 500;
     }
 
     .hero-actions { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-    .hero-actions .btn { padding: 1.2rem 3rem; }
+    .hero-actions .btn { padding: 1.25rem 3.5rem; font-size: 1rem; }
 
     .hero-visual {
         position: absolute;
         bottom: 0;
         right: 0;
-        width: 40%;
+        width: 35%;
         height: 100%;
-        background: linear-gradient(to right, transparent, rgba(0, 212, 255, 0.05));
-        clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+        background: linear-gradient(to right, transparent, rgba(0, 212, 255, 0.03));
+        clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%);
     }
 
-    /* Tablet & Mobile Hero */
     @media (max-width: 992px) {
-        .home-hero { min-height: auto; padding: 120px 0 80px; }
-        .hero-title { font-size: 3rem; }
-        .hero-description { margin-bottom: 2.5rem; }
-        .hero-visual { width: 100%; opacity: 0.3; }
-    }
-    
-    @media (max-width: 576px) {
-        .hero-title { font-size: 2.5rem; }
-        .hero-actions { flex-direction: column; }
-        .hero-actions .btn { width: 100%; }
+        .home-hero { min-height: auto; padding: 160px 0 100px; }
+        .hero-title { font-size: 3.5rem; }
+        .hero-visual { display: none; }
     }
 </style>
 
 <!-- Stats Bar -->
-<section style="background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 40px 0;">
+<section style="background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 60px 0;">
     <div class="container">
         <div class="grid grid-4" style="text-align: center;">
             <div data-aos="fade-up" data-aos-delay="100">
-                <h3 style="font-size: 2.5rem; margin-bottom: 0;" data-count="25" data-suffix="+">0</h3>
-                <p style="color: var(--text-muted); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1.5px; font-weight: 700;">Years of Excellence</p>
+                <div style="font-size: 1.2rem; color: var(--accent-dark); margin-bottom: 0.5rem;"><i class="fas fa-history"></i></div>
+                <h3 style="font-size: 2.8rem; margin-bottom: 0; color: var(--primary);" data-count="25" data-suffix="+">0</h3>
+                <p style="color: var(--text-muted); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px; font-weight: 800;">Years Legacy</p>
             </div>
             <div data-aos="fade-up" data-aos-delay="200">
-                <h3 style="font-size: 2.5rem; margin-bottom: 0;" data-count="500" data-suffix="+">0</h3>
-                <p style="color: var(--text-muted); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1.5px; font-weight: 700;">Industrial Clients</p>
+                <div style="font-size: 1.2rem; color: var(--accent-dark); margin-bottom: 0.5rem;"><i class="fas fa-users-cog"></i></div>
+                <h3 style="font-size: 2.8rem; margin-bottom: 0; color: var(--primary);" data-count="500" data-suffix="+">0</h3>
+                <p style="color: var(--text-muted); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px; font-weight: 800;">Industrial Partners</p>
             </div>
             <div data-aos="fade-up" data-aos-delay="300">
-                <h3 style="font-size: 2.5rem; margin-bottom: 0;" data-count="30" data-suffix="+">0</h3>
-                <p style="color: var(--text-muted); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1.5px; font-weight: 700;">Serving Countries</p>
+                <div style="font-size: 1.2rem; color: var(--accent-dark); margin-bottom: 0.5rem;"><i class="fas fa-globe-americas"></i></div>
+                <h3 style="font-size: 2.8rem; margin-bottom: 0; color: var(--primary);" data-count="30" data-suffix="+">0</h3>
+                <p style="color: var(--text-muted); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px; font-weight: 800;">Export Markets</p>
             </div>
             <div data-aos="fade-up" data-aos-delay="400">
-                <h3 style="font-size: 2.5rem; margin-bottom: 0;">ZDHC</h3>
-                <p style="color: var(--text-muted); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1.5px; font-weight: 700;">Certified Quality</p>
+                <div style="font-size: 1.2rem; color: var(--accent-dark); margin-bottom: 0.5rem;"><i class="fas fa-award"></i></div>
+                <h3 style="font-size: 2.8rem; margin-bottom: 0; color: var(--primary);">ZDHC</h3>
+                <p style="color: var(--text-muted); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px; font-weight: 800;">Level 3 Certified</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Sector Introduction -->
-<section class="section" style="background: var(--bg-light); padding-top: 120px;">
+<!-- Division Overview -->
+<section class="section" style="background: var(--bg-light); padding: 120px 0;">
     <div class="container">
-        <div class="grid grid-2" style="gap: 4rem; align-items: center;">
-            <div data-aos="fade-right">
-                <h2 style="font-size: 2.8rem; margin-bottom: 2rem;">A Dual Legacy of <span style="color: var(--accent-dark);">Industrial Excellence</span></h2>
-                <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 2rem;">
-                    From advanced chemical formulations to premium protective and performance apparel, Nasim and Sons provides integrated solutions for modern industries. We bridge the gap between technical science and daily operational needs.
-                </p>
-                <div style="display: flex; gap: 1.5rem;">
-                    <a href="{% url 'products:landing' %}" class="btn btn-primary">Chemical Division</a>
-                    <a href="{% url 'clothing:list' %}" class="btn btn-outline">Clothing Division</a>
+        <div style="text-align: center; max-width: 800px; margin: 0 auto 5rem;" data-aos="fade-up">
+            <h4 style="color: var(--accent-dark); text-transform: uppercase; letter-spacing: 3px; font-size: 0.85rem; margin-bottom: 1rem; font-weight: 800;">Dual Expertise</h4>
+            <h2 style="font-size: 3rem; margin-bottom: 1.5rem; letter-spacing: -1px;">Bridging Chemistry and <span style="color: var(--accent-dark);">Craftsmanship.</span></h2>
+            <p style="font-size: 1.15rem; line-height: 1.8; color: var(--text-muted);">
+                Since our inception, Nasim and Sons has been at the forefront of industrial innovation. We now integrate our technical prowess in chemistry with a high-performance clothing division to serve the modern workforce.
+            </p>
+        </div>
+
+        <div class="grid grid-2" style="gap: 2rem;">
+            <!-- Chemical Card -->
+            <div class="division-card card" data-aos="fade-right">
+                <div class="div-img-wrapper" style="height: 400px; overflow: hidden; position: relative;">
+                    <img src="https://images.unsplash.com/photo-1574689232193-97ae5f73bb6e?auto=format&fit=crop&w=1000&q=80" style="width: 100%; height: 100%; object-fit: cover; transition: 0.8s;">
+                    <div class="div-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(10, 37, 64, 0.9), transparent); display: flex; align-items: flex-end; padding: 3rem;">
+                        <div style="color: white; transform: translateY(20px); transition: 0.4s;" class="div-content">
+                            <h3 style="color: white; font-size: 2rem; margin-bottom: 1rem;">Chemical Division</h3>
+                            <p style="opacity: 0.8; margin-bottom: 2rem;">ZDHC-Certified Industrial Solutions & Technical Formulas.</p>
+                            <a href="{% url 'products:landing' %}" class="btn btn-accent" style="padding: 0.8rem 2.5rem;">View Catalog</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div data-aos="fade-left">
-                <div class="card" style="padding: 0; overflow: hidden; border: none; box-shadow: var(--shadow-lg);">
-                    <img src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=1000&q=80" style="width: 100%; height: 400px; object-fit: cover;">
+
+            <!-- Clothing Card -->
+            <div class="division-card card" data-aos="fade-left">
+                <div class="div-img-wrapper" style="height: 400px; overflow: hidden; position: relative;">
+                    <img src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=1000&q=80" style="width: 100%; height: 100%; object-fit: cover; transition: 0.8s;">
+                    <div class="div-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(10, 37, 64, 0.9), transparent); display: flex; align-items: flex-end; padding: 3rem;">
+                        <div style="color: white; transform: translateY(20px); transition: 0.4s;" class="div-content">
+                            <h3 style="color: white; font-size: 2rem; margin-bottom: 1rem;">Clothing Division</h3>
+                            <p style="opacity: 0.8; margin-bottom: 2rem;">Premium Performance Workwear & Specialized Apparel.</p>
+                            <a href="{% url 'clothing:list' %}" class="btn btn-accent" style="padding: 0.8rem 2.5rem;">Explore Apparel</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<style>
+    .division-card:hover img { transform: scale(1.1); }
+    .division-card:hover .div-content { transform: translateY(0); }
+    .division-card { border: none !important; }
+
+    /* Mobile & Tablet Optimizations */
+    @media (max-width: 992px) {
+        .hero-title { font-size: 3.5rem !important; margin-bottom: 1.5rem; }
+        .hero-description { font-size: 1.1rem !important; margin-bottom: 3rem !important; }
+        .hero-actions .btn { width: 100%; text-align: center; }
+        
+        .section { padding: 80px 0 !important; }
+        .grid-2, .grid-3, .grid-4 { gap: 1.5rem !important; }
+        
+        .division-card .div-img-wrapper { height: 350px !important; }
+        .div-overlay { padding: 2rem !important; }
+        .div-content h3 { font-size: 1.5rem !important; }
+    }
+
+    @media (max-width: 768px) {
+        .home-hero { padding: 140px 0 60px !important; text-align: center; }
+        .hero-content { margin: 0 auto; }
+        .hero-actions { justify-content: center; }
+        .hero-title { font-size: 2.8rem !important; }
+        
+        .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr !important; }
+        
+        .stats-grid h3 { font-size: 2.2rem !important; }
+        
+        .legacy-badge { 
+            position: relative !important; 
+            bottom: 0 !important; 
+            right: 0 !important; 
+            margin: 2rem auto 0;
+            max-width: 200px;
+            padding: 2rem !important;
+        }
+        .img-stack { padding-left: 0 !important; padding-bottom: 0 !important; }
+        .img-stack div { display: none; } /* Hide the decorative border box on mobile to save space */
+    }
+</style>
 
 <!-- Chemical Categories -->
-<section class="section">
+<section class="section" style="padding-top: 100px;">
     <div class="container">
-        <div style="margin-bottom: 4rem;" data-aos="fade-up">
-            <h4 style="color: var(--accent-dark); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 0.5rem;">Science & Innovation</h4>
-            <h2 style="font-size: 2.5rem;">Industrial Chemical Solutions</h2>
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 5rem;" data-aos="fade-up">
+            <div>
+                <h4 style="color: var(--accent-dark); text-transform: uppercase; letter-spacing: 3px; font-size: 0.85rem; margin-bottom: 1rem; font-weight: 800;">Science & Formulations</h4>
+                <h2 style="font-size: 3rem; letter-spacing: -1px;">Industrial Chemical <span style="color: var(--accent-dark);">Core.</span></h2>
+            </div>
+            <a href="{% url 'products:landing' %}" class="btn btn-outline" style="border-radius: 50px; text-transform: none; padding: 0.8rem 2.5rem;">Explore Full Catalog &rarr;</a>
         </div>
         
         <div class="grid grid-3">
             {% for category in categories %}
-            <a href="{{ category.get_absolute_url }}" class="card" style="padding: 3rem 2rem; text-align: center; display: block;" data-aos="fade-up">
-                <div style="width: 80px; height: 80px; background: var(--bg-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; color: var(--primary); font-size: 2rem; transition: var(--transition);">
+            <a href="{{ category.get_absolute_url }}" class="card cat-home-card" style="padding: 4rem 3rem; text-align: left; display: block; border-bottom: 4px solid var(--border);" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}">
+                <div class="cat-icon" style="width: 70px; height: 70px; background: var(--bg-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 2.5rem; color: var(--primary); font-size: 1.8rem; transition: var(--transition);">
                     <i class="fas fa-flask"></i>
                 </div>
-                <h3>{{ category.name }}</h3>
-                <p style="color: var(--text-muted); margin-top: 1rem; font-size: 0.9rem; line-height: 1.6;">{{ category.description|truncatewords:15 }}</p>
-                <div style="margin-top: 2rem; color: var(--accent-dark); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">
-                    View Products <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">{{ category.name }}</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 2rem;">{{ category.description|truncatewords:15 }}</p>
+                <div class="view-products" style="color: var(--accent-dark); font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; display: flex; align-items: center; gap: 10px;">
+                    View Solutions <i class="fas fa-arrow-right"></i>
                 </div>
             </a>
             {% endfor %}
@@ -173,76 +238,91 @@
     </div>
 </section>
 
+<style>
+    .cat-home-card { transition: 0.4s; }
+    .cat-home-card:hover { border-bottom-color: var(--accent); }
+    .cat-home-card:hover .cat-icon { background: var(--primary); color: var(--accent); transform: scale(1.1) rotate(5deg); }
+    .cat-home-card:hover .view-products { gap: 15px; }
+</style>
+
 <!-- Clothing Collection -->
-<section class="section" style="background: var(--bg-white); border-top: 1px solid var(--border);">
+<section class="section" style="background: var(--bg-white); border-top: 1px solid var(--border); padding: 120px 0;">
     <div class="container">
-        <div style="text-align: right; margin-bottom: 4rem;" data-aos="fade-up">
-            <h4 style="color: var(--accent-dark); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 0.5rem;">Apparel & Performance</h4>
-            <h2 style="font-size: 2.5rem;">Premium Clothing Line</h2>
+        <div style="text-align: center; margin-bottom: 6rem;" data-aos="fade-up">
+            <h4 style="color: var(--accent-dark); text-transform: uppercase; letter-spacing: 3px; font-size: 0.85rem; margin-bottom: 1rem; font-weight: 800;">Apparel Engineering</h4>
+            <h2 style="font-size: 3rem; letter-spacing: -1px;">Premium Industrial <span style="color: var(--accent-dark);">Apparel.</span></h2>
         </div>
         
         <div class="grid grid-4">
             {% for item in featured_clothing %}
-            <div class="card clothing-home-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}">
-                <a href="{{ item.get_absolute_url }}">
-                    <div style="height: 300px; overflow: hidden; position: relative;">
-                        <img src="{{ item.image.url }}" style="width: 100%; height: 100%; object-fit: cover; transition: 0.5s;">
+            <div class="card clothing-home-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}" style="border: none; box-shadow: none; background: transparent;">
+                <a href="{{ item.get_absolute_url }}" style="display: block;">
+                    <div style="height: 450px; overflow: hidden; position: relative; border-radius: 12px; margin-bottom: 2rem; background: #f5f5f5;">
+                        <img src="{{ item.image.url }}" style="width: 100%; height: 100%; object-fit: cover; transition: 1.2s cubic-bezier(0.4, 0, 0.2, 1);">
+                        <div class="clothing-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 37, 64, 0.2); opacity: 0; transition: 0.5s; display: flex; align-items: center; justify-content: center;">
+                            <span class="btn btn-accent" style="padding: 1rem 2rem; font-size: 0.8rem;">View Detail</span>
+                        </div>
                     </div>
                 </a>
-                <div style="padding: 1.5rem; text-align: center;">
-                    <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">{{ item.name }}</h4>
-                    <p style="color: var(--accent-dark); font-weight: 800;">Rs {{ item.price }}</p>
+                <div style="text-align: left;">
+                    <span style="font-size: 0.75rem; color: var(--accent-dark); font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px;">{{ item.category.name }}</span>
+                    <h4 style="font-size: 1.15rem; margin: 0.5rem 0; color: var(--primary);">{{ item.name }}</h4>
+                    <p style="color: var(--text-main); font-weight: 700; font-size: 1rem;">Rs {{ item.price }}</p>
                 </div>
             </div>
             {% endfor %}
         </div>
 
-        <div style="text-align: center; margin-top: 4rem;">
-            <a href="{% url 'clothing:list' %}" class="btn btn-outline" style="min-width: 250px;">Browse Clothing Store</a>
+        <div style="text-align: center; margin-top: 6rem;">
+            <a href="{% url 'clothing:list' %}" class="btn btn-primary" style="min-width: 300px; padding: 1.25rem 4rem;">Explore Entire Collection</a>
         </div>
     </div>
 </section>
 
 <style>
-    .clothing-home-card:hover img { transform: scale(1.1); }
+    .clothing-home-card:hover img { transform: scale(1.05); }
+    .clothing-home-card:hover .clothing-overlay { opacity: 1; }
 </style>
 
 <!-- Why Choose Us -->
-<section class="section" style="background-color: var(--primary); color: white;">
-    <div class="container">
-        <div class="grid grid-2" style="align-items: center;">
+<section class="section" style="background-color: var(--primary); color: white; padding: 120px 0; overflow: hidden; position: relative;">
+    <div class="container" style="position: relative; z-index: 2;">
+        <div class="grid grid-2" style="align-items: center; gap: 6rem;">
             <div data-aos="fade-right">
-                <h4 style="color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 1rem;">Why Nasim & Sons</h4>
-                <h2 style="color: white; font-size: 2.5rem; margin-bottom: 2rem;">Engineered for Competitive Advantage</h2>
-                <div style="display: grid; gap: 2rem;">
-                    <div style="display: flex; gap: 1.5rem;">
-                        <div style="font-size: 1.5rem; color: var(--accent);"><i class="fas fa-check-circle"></i></div>
+                <h4 style="color: var(--accent); text-transform: uppercase; letter-spacing: 3px; font-size: 0.85rem; margin-bottom: 1.5rem; font-weight: 800;">Our Value Proposition</h4>
+                <h2 style="color: white; font-size: 3.2rem; margin-bottom: 2.5rem; letter-spacing: -1.5px; line-height: 1.1;">Engineered for Competitive Advantage.</h2>
+                <div style="display: grid; gap: 3rem;">
+                    <div style="display: flex; gap: 2rem;">
+                        <div style="font-size: 2rem; color: var(--accent);"><i class="fas fa-microscope"></i></div>
                         <div>
-                            <h4 style="color: white; margin-bottom: 0.5rem;">Rigorous QA/QC</h4>
-                            <p style="opacity: 0.7; font-size: 0.95rem;">Every batch undergoes strict multi-stage testing in our certified laboratories.</p>
+                            <h4 style="color: white; margin-bottom: 0.75rem; font-size: 1.25rem;">Industrial R&D</h4>
+                            <p style="opacity: 0.7; font-size: 1rem; line-height: 1.7;">Advanced laboratory testing for every batch ensuring absolute consistency in performance.</p>
                         </div>
                     </div>
-                    <div style="display: flex; gap: 1.5rem;">
-                        <div style="font-size: 1.5rem; color: var(--accent);"><i class="fas fa-check-circle"></i></div>
+                    <div style="display: flex; gap: 2rem;">
+                        <div style="font-size: 2rem; color: var(--accent);"><i class="fas fa-shield-alt"></i></div>
                         <div>
-                            <h4 style="color: white; margin-bottom: 0.5rem;">Technical Support</h4>
-                            <p style="opacity: 0.7; font-size: 0.95rem;">On-site application assistance and custom formulation development.</p>
+                            <h4 style="color: white; margin-bottom: 0.75rem; font-size: 1.25rem;">ZDHC Compliance</h4>
+                            <p style="opacity: 0.7; font-size: 1rem; line-height: 1.7;">Level 3 certified solutions prioritizing environmental safety and operational longevity.</p>
                         </div>
                     </div>
-                    <div style="display: flex; gap: 1.5rem;">
-                        <div style="font-size: 1.5rem; color: var(--accent);"><i class="fas fa-check-circle"></i></div>
+                    <div style="display: flex; gap: 2rem;">
+                        <div style="font-size: 2rem; color: var(--accent);"><i class="fas fa-shipping-fast"></i></div>
                         <div>
-                            <h4 style="color: white; margin-bottom: 0.5rem;">Sustainable Practices</h4>
-                            <p style="opacity: 0.7; font-size: 0.95rem;">Environmentally conscious manufacturing and waste reduction protocols.</p>
+                            <h4 style="color: white; margin-bottom: 0.75rem; font-size: 1.25rem;">Global Logistics</h4>
+                            <p style="opacity: 0.7; font-size: 1rem; line-height: 1.7;">Optimized supply chain network delivering specialized solutions across 30+ countries.</p>
                         </div>
                     </div>
                 </div>
             </div>
             <div style="position: relative;" data-aos="fade-left">
-                <img src="https://images.unsplash.com/photo-1574634534894-89d7576c8259?auto=format&fit=crop&w=800&q=80" style="border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);">
-                <div class="years-legacy-box">
-                    <h2 style="margin-bottom: 0; font-size: 3rem;">25</h2>
-                    <p style="font-weight: 800; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem;">Years Legacy</p>
+                <div class="img-stack" style="position: relative; padding-bottom: 40px; padding-left: 40px;">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" style="border-radius: 20px; box-shadow: var(--shadow-lg); width: 100%; position: relative; z-index: 2;">
+                    <div style="position: absolute; top: -40px; left: -40px; width: 100%; height: 100%; border: 2px solid var(--accent); border-radius: 20px; z-index: 1;"></div>
+                </div>
+                <div class="legacy-badge">
+                    <h2 style="margin-bottom: 0; font-size: 3.5rem; color: var(--primary);">25</h2>
+                    <p style="font-weight: 800; text-transform: uppercase; letter-spacing: 2px; font-size: 0.75rem; color: var(--primary);">Years of Legacy</p>
                 </div>
             </div>
         </div>
@@ -250,53 +330,56 @@
 </section>
 
 <style>
-    .years-legacy-box {
+    .legacy-badge {
         position: absolute; 
-        bottom: -30px; 
-        left: -30px; 
+        bottom: -20px; 
+        right: -20px; 
         background: var(--accent); 
         padding: 40px; 
-        border-radius: var(--radius-md); 
+        border-radius: 20px; 
         box-shadow: var(--shadow-lg); 
-        color: var(--primary);
+        text-align: center;
+        z-index: 3;
     }
     @media (max-width: 992px) {
-        .years-legacy-box {
-            left: 20px;
-            bottom: 20px;
-            padding: 20px;
-        }
+        .legacy-badge { right: 20px; }
+        .grid-2 { gap: 4rem; }
     }
 </style>
 
 <!-- Latest Insights Section -->
-<section class="section">
+<section class="section" style="padding: 120px 0;">
     <div class="container">
-        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem;" data-aos="fade-up">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 5rem;" data-aos="fade-up">
             <div>
-                <h4 style="color: var(--accent-dark); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 0.5rem;">Intellectual Capital</h4>
-                <h2 style="font-size: 2.5rem;">Latest Industry Insights</h2>
+                <h4 style="color: var(--accent-dark); text-transform: uppercase; letter-spacing: 3px; font-size: 0.85rem; margin-bottom: 1rem; font-weight: 800;">Strategic Insights</h4>
+                <h2 style="font-size: 3rem; letter-spacing: -1px;">Technical <span style="color: var(--accent-dark);">Knowledge.</span></h2>
             </div>
-            <a href="{% url 'blog:list' %}" style="color: var(--primary); font-weight: 700; border-bottom: 2px solid var(--accent);">View All Articles &rarr;</a>
+            <a href="{% url 'blog:list' %}" class="btn btn-outline" style="border-radius: 50px; text-transform: none; padding: 0.8rem 2.5rem;">Read All Articles &rarr;</a>
         </div>
         
         <div class="grid grid-3">
             {% for post in latest_posts %}
-            <div class="card" data-aos="fade-up">
-                <div style="height: 200px; background: var(--bg-light); overflow: hidden;">
+            <div class="card blog-home-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}" style="border: none; box-shadow: var(--shadow-sm);">
+                <div style="height: 250px; overflow: hidden; border-radius: 12px 12px 0 0;">
                     {% if post.image %}
-                    <img src="{{ post.image.url }}" style="height: 100%; width: 100%; object-fit: cover;">
+                    <img src="{{ post.image.url }}" style="height: 100%; width: 100%; object-fit: cover; transition: 0.5s;">
                     {% else %}
-                    <div style="height: 100%; display: flex; align-items: center; justify-content: center; color: var(--border); font-size: 4rem;">
+                    <div style="height: 100%; background: var(--bg-light); display: flex; align-items: center; justify-content: center; color: var(--border); font-size: 4rem;">
                         <i class="fas fa-newspaper"></i>
                     </div>
                     {% endif %}
                 </div>
-                <div style="padding: 2rem;">
-                    <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; letter-spacing: 1px;">{{ post.created_at|date:"F d, Y" }}</span>
-                    <h3 style="font-size: 1.25rem; margin: 1rem 0; line-height: 1.4;">{{ post.title }}</h3>
-                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">{{ post.content|striptags|truncatewords:15 }}</p>
-                    <a href="{{ post.get_absolute_url }}" style="color: var(--primary); font-weight: 700; font-size: 0.85rem; text-transform: uppercase;">Read Article &rarr;</a>
+                <div style="padding: 2.5rem; background: white; border-radius: 0 0 12px 12px;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem;">
+                        <span style="font-size: 0.75rem; color: var(--accent-dark); font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">Insights</span>
+                        <span style="width: 4px; height: 4px; border-radius: 50%; background: var(--border);"></span>
+                        <span style="font-size: 0.8rem; color: var(--text-muted);">{{ post.created_at|date:"M d, Y" }}</span>
+                    </div>
+                    <h3 style="font-size: 1.4rem; margin-bottom: 1.5rem; line-height: 1.4; color: var(--primary);">{{ post.title }}</h3>
+                    <a href="{{ post.get_absolute_url }}" style="color: var(--primary); font-weight: 800; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 10px;">
+                        Read Analysis <i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                    </a>
                 </div>
             </div>
             {% endfor %}
@@ -304,17 +387,24 @@
     </div>
 </section>
 
+<style>
+    .blog-home-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
+    .blog-home-card:hover img { transform: scale(1.05); }
+    .blog-home-card { transition: 0.4s; }
+</style>
+
 <!-- Call to Action -->
-<section class="section" style="padding-bottom: 0;">
+<section class="section" style="padding-bottom: 80px;">
     <div class="container">
-        <div style="background: linear-gradient(135deg, var(--accent) 0%, #00bfff 100%); padding: 80px; border-radius: var(--radius-lg); text-align: center; color: var(--primary);" data-aos="zoom-in">
-            <h2 style="font-size: 3rem; margin-bottom: 1.5rem;">Ready to partner with us?</h2>
-            <p style="font-size: 1.25rem; font-weight: 500; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto; opacity: 0.9;">
-                Discuss your specific requirements with our technical consultants today.
+        <div style="background: linear-gradient(135deg, var(--primary) 0%, #06182a 100%); padding: 100px 60px; border-radius: 30px; text-align: center; color: white; position: relative; overflow: hidden;" data-aos="zoom-in">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(0, 212, 255, 0.1) 0%, transparent 70%); pointer-events: none;"></div>
+            <h2 style="font-size: 3.5rem; margin-bottom: 2rem; color: white; letter-spacing: -2px;">Pioneering the <span style="color: var(--accent);">Industrial Frontier.</span></h2>
+            <p style="font-size: 1.25rem; font-weight: 400; margin-bottom: 4rem; max-width: 700px; margin-left: auto; margin-right: auto; opacity: 0.8; line-height: 1.6;">
+                Partner with Nasim and Sons for integrated industrial chemical solutions and premium workwear performance.
             </p>
-            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
-                <a href="{% url 'core:contact' %}" class="btn btn-primary" style="padding: 1.2rem 4rem;">Contact Us</a>
-                <a href="{% url 'inquiries:quote_list' %}" class="btn btn-outline" style="padding: 1.2rem 4rem; border-color: var(--primary);">Request Pricing</a>
+            <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+                <a href="{% url 'core:contact' %}" class="btn btn-accent" style="padding: 1.25rem 5rem; border-radius: 50px;">Consult Our Experts</a>
+                <a href="{% url 'inquiries:quote_list' %}" class="btn btn-outline" style="padding: 1.25rem 5rem; border-color: rgba(255,255,255,0.3); color: white; border-radius: 50px;">Request Technical Quote</a>
             </div>
         </div>
     </div>
