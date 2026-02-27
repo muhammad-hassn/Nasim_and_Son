@@ -9,6 +9,10 @@
     <meta name="description" content="{% block meta_description %}Nasim and Sons - Leading provider of ZDHC-certified industrial chemical solutions, high-purity variants, and technical consultancy since 1998.{% endblock %}">
     <link rel="canonical" href="{{ request.build_absolute_uri }}">
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{% static 'images/Favicon logo.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'images/Favicon logo.png' %}">
+    
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="{% block og_title %}{{ company_name }}{% endblock %}">
@@ -177,7 +181,7 @@
             z-index: 2500; /* Priority over overlay */
             background: var(--bg-white);
             border-bottom: 2px solid var(--primary);
-            height: 75px; 
+            height: 85px; /* Restored to a compact, professional height */
             display: flex;
             align-items: center;
             box-shadow: var(--shadow-sm); 
@@ -197,9 +201,28 @@
             color: var(--primary);
             letter-spacing: -0.5px;
         }
+        .logo img {
+            height: 72px; /* Reduced from 180px */
+            margin: -15px 0; /* Reduced crop margin */
+            width: auto;
+            object-fit: contain;
+            display: block;
+            transition: var(--transition);
+        }
+        @media (max-width: 768px) {
+            .logo img {
+                height: 50px; /* Scaled for mobile */
+                margin: -20px 0;
+            }
+        }
         .logo i { color: var(--accent); font-size: 1.8rem; }
         
-        .nav-links { display: flex; align-items: center; gap: 2.5rem; }
+        .nav-links { 
+            display: flex; 
+            align-items: center; 
+            gap: 1.8rem; /* Reduced gap slightly to fit links */
+            flex-shrink: 0;
+        }
         .nav-links a {
             font-weight: 600;
             font-size: 0.95rem;
@@ -533,8 +556,7 @@
             <nav class="navbar">
                 <div class="logo">
                     <a href="{% url 'core:home' %}">
-                        <i class="fas fa-atom"></i>
-                        <span>{{ company_name }}</span>
+                        <img src="{% static 'images/logo2.png' %}" alt="{{ company_name }} Logo">
                     </a>
                 </div>
 
@@ -639,46 +661,65 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Premium Footer -->
     <footer>
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-brand">
-                    <h2><i class="fas fa-atom"></i> {{ company_name }}</h2>
-                    <p>Providing precision-engineered chemical solutions for global industrial advancement since 1998.</p>
-                    <div style="display: flex; gap: 1.5rem;">
-                        <a href="#" style="font-size: 1.4rem; opacity: 0.6;"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" style="font-size: 1.4rem; opacity: 0.6;"><i class="fab fa-twitter"></i></a>
-                        <a href="#" style="font-size: 1.4rem; opacity: 0.6;"><i class="fab fa-facebook"></i></a>
+                <div class="footer-brand" style="overflow: hidden;">
+                    <img src="{% static 'images/logo2.png' %}" alt="{{ company_name }}" style="height: 60px; margin: -15px 12; width: auto; filter: brightness(0) invert(1);"> 
+                    <p style="font-size: 1.1rem; line-height: 1.8; opacity: 0.8;">Providing precision-engineered chemical solutions and premium industrial apparel for global advancement.</p>
+                    <div class="footer-socials" style="display: flex; gap: 1.5rem; margin-top: 2rem;">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
                     </div>
                 </div>
 
+                <style>
+                    .social-link {
+                        width: 45px;
+                        height: 45px;
+                        background: rgba(255, 255, 255, 0.05);
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 1.1rem;
+                        color: white;
+                        border: 1px solid rgba(255, 255, 255, 0.1);
+                        transition: var(--transition);
+                    }
+                    .social-link:hover {
+                        background: var(--accent);
+                        color: var(--primary);
+                        transform: translateY(-5px);
+                    }
+                </style>
+
                 <div class="footer-links">
-                    <h4>Quick Links</h4>
+                    <h4>Divisions</h4>
                     <ul>
-                        <li><a href="{% url 'core:home' %}">Home</a></li>
-                        <li><a href="{% url 'core:company' %}">Company</a></li>
-                        <li><a href="{% url 'products:landing' %}">Products</a></li>
-                        <li><a href="{% url 'blog:list' %}">Insights</a></li>
+                        <li><a href="{% url 'products:landing' %}"><i class="fas fa-flask" style="margin-right: 10px; font-size: 0.8rem; color: var(--accent);"></i> Chemical Solutions</a></li>
+                        <li><a href="{% url 'clothing:list' %}"><i class="fas fa-tshirt" style="margin-right: 10px; font-size: 0.8rem; color: var(--accent);"></i> Premium Apparel</a></li>
+                        <li><a href="{% url 'blog:list' %}"><i class="fas fa-lightbulb" style="margin-right: 10px; font-size: 0.8rem; color: var(--accent);"></i> Industrial Insights</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-links">
-                    <h4>Support</h4>
+                    <h4>Company</h4>
                     <ul>
-                        <li><a href="{% url 'core:contact' %}">Contact Us</a></li>
+                        <li><a href="{% url 'core:company' %}">About Us</a></li>
+                        <li><a href="{% url 'core:certificates' %}">Compliance</a></li>
+                        <li><a href="{% url 'core:contact' %}">Contact</a></li>
                         <li><a href="{% url 'inquiries:quote_list' %}">Request Quote</a></li>
-                        <li><a href="{% url 'core:privacy_policy' %}">Privacy Policy</a></li>
-                        <li><a href="{% url 'core:terms_of_service' %}">Terms of Service</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-contact">
-                    <h4>Global HQ</h4>
-                    <p><i class="fas fa-map-marker-alt"></i> Al Noor Society, Block 19, FB Area, Karachi, PK</p>
+                    <h4>Contact Details</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> FB Area, Karachi, PK</p>
                     <p><i class="fas fa-envelope"></i> info@nasimandsons.com</p>
                     <p><i class="fas fa-phone"></i> +92 300 1234567</p>
-                    <p><i class="fas fa-clock"></i> Mon - Sat: 9:00 - 18:00</p>
                 </div>
             </div>
 

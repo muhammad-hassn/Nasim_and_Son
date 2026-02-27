@@ -10,22 +10,334 @@
 {% endblock %}
 
 {% block content %}
-<!-- Premium Header Section -->
-<section class="clothing-hero" style="background: linear-gradient(rgba(10, 37, 64, 0.8), rgba(10, 37, 64, 0.8)), url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center; padding: 100px 0 60px; color: white; text-align: center;">
-    <div class="container">
-        <nav class="breadcrumb-nav" style="margin-bottom: 2rem; opacity: 0.8; font-size: 0.9rem;">
-            <a href="{% url 'core:home' %}" style="color: white;">Home</a> / 
-            <a href="{% url 'clothing:list' %}" style="color: white;">Clothing</a>
-            {% if category %} / <span style="color: var(--accent);">{{ category.name }}</span> {% endif %}
-        </nav>
-        <h1 style="font-size: clamp(2.5rem, 8vw, 3.5rem); font-weight: 800; margin-bottom: 1.5rem; letter-spacing: -1px; line-height: 1;" data-aos="fade-up">
-            {% if category %}{{ category.name }}{% else %}The Clothing Collection{% endif %}
-        </h1>
-        <p style="max-width: 700px; margin: 0 auto; font-size: 1.1rem; opacity: 0.9; line-height: 1.6;" data-aos="fade-up" data-aos-delay="100">
-            {% if category %}{{ category.description }}{% else %}Discover our range of precision-crafted apparel, from heavy-duty industrial workwear to premium lifestyle streetwear.{% endif %}
-        </p>
+<!-- Modern Professional Hero Section -->
+<section class="clothing-hero-premium">
+    <div class="hero-overlay"></div>
+    <div class="hero-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+    </div>
+    
+    <div class="container hero-content-wrapper">
+        <div class="hero-text-area" data-aos="fade-right">
+            <nav class="breadcrumb-classic">
+                <a href="{% url 'core:home' %}">Home</a>
+                <span class="sep"><i class="fas fa-chevron-right"></i></span>
+                <a href="{% url 'clothing:list' %}">Clothing</a>
+                {% if category %}
+                <span class="sep"><i class="fas fa-chevron-right"></i></span>
+                <span class="active">{{ category.name }}</span>
+                {% endif %}
+            </nav>
+            
+            <h1 class="hero-title">
+                {% if category %}
+                    <span class="accent-line">{{ category.name }}</span>
+                {% else %}
+                    Premium <span class="accent-line">Apparel</span> Solutions
+                {% endif %}
+            </h1>
+            
+            <p class="hero-subtitle">
+                {% if category %}
+                    {{ category.description }}
+                {% else %}
+                    Engineered for durability, designed for style. From heavy-duty industrial workwear to high-performance fitness gear and boutique streetwear.
+                {% endif %}
+            </p>
+
+            <div class="hero-actions">
+                <a href="#clothing-grid" class="btn-explore">
+                    Browse Collection <i class="fas fa-arrow-down"></i>
+                </a>
+                <div class="trust-pill">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Premium Quality Guaranteed</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-stats-card" data-aos="fade-left" data-aos-delay="200">
+            <div class="stat-item">
+                <span class="stat-num" data-count="50" data-suffix="+">0</span>
+                <span class="stat-label">Product Categories</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-num" data-count="1000" data-suffix="+">0</span>
+                <span class="stat-label">Happy Clients</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-num" data-count="25" data-suffix="+">0</span>
+                <span class="stat-label">Years Excellence</span>
+            </div>
+        </div>
     </div>
 </section>
+
+<style>
+    /* Premium Hero Styles */
+    .clothing-hero-premium {
+        position: relative;
+        min-height: 550px;
+        padding: 160px 0 100px;
+        background: #0a2540;
+        background-image: url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1920&q=80');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: white;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+    }
+
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(10, 37, 64, 0.95) 0%, rgba(10, 37, 64, 0.7) 100%);
+        z-index: 1;
+    }
+
+    .hero-shapes .shape {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        z-index: 2;
+        opacity: 0.3;
+    }
+
+    .shape-1 {
+        width: 300px;
+        height: 300px;
+        background: var(--accent);
+        top: -100px;
+        right: -50px;
+    }
+
+    .shape-2 {
+        width: 400px;
+        height: 400px;
+        background: #0080ff;
+        bottom: -150px;
+        left: -100px;
+    }
+
+    .hero-content-wrapper {
+        position: relative;
+        z-index: 10;
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 4rem;
+        align-items: center;
+    }
+
+    .breadcrumb-classic {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin-bottom: 2rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .breadcrumb-classic a {
+        color: rgba(255, 255, 255, 0.7);
+        transition: 0.3s;
+    }
+
+    .breadcrumb-classic a:hover {
+        color: var(--accent);
+    }
+
+    .breadcrumb-classic .sep {
+        font-size: 0.7rem;
+        opacity: 0.4;
+    }
+
+    .breadcrumb-classic .active {
+        color: var(--accent);
+    }
+
+    .hero-title {
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        line-height: 1.1;
+        letter-spacing: -2px;
+    }
+
+    .accent-line {
+        color: var(--accent);
+        position: relative;
+        display: inline-block;
+    }
+
+    .accent-line::after {
+        content: '';
+        position: absolute;
+        bottom: 5px;
+        left: 0;
+        width: 100%;
+        height: 8px;
+        background: rgba(0, 212, 255, 0.2);
+        z-index: -1;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+        line-height: 1.7;
+        opacity: 0.85;
+        margin-bottom: 2.5rem;
+        max-width: 600px;
+        font-weight: 400;
+    }
+
+    .hero-actions {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .btn-explore {
+        background: white;
+        color: var(--primary);
+        padding: 1.2rem 2.5rem;
+        border-radius: 50px;
+        text-transform: uppercase;
+        font-weight: 800;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .btn-explore:hover {
+        transform: translateY(-5px);
+        background: var(--accent);
+        color: var(--primary);
+        box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
+    }
+
+    .trust-pill {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 0.8rem 1.5rem;
+        border-radius: 50px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    .trust-pill i {
+        color: var(--accent);
+    }
+
+    /* Hero Stats Card */
+    .hero-stats-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(15px);
+        border-radius: 30px;
+        padding: 3rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .stat-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .stat-num {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--accent);
+        line-height: 1;
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+        opacity: 0.6;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
+    }
+
+    .stat-divider {
+        height: 1px;
+        background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+    }
+
+    @media (max-width: 992px) {
+        .hero-content-wrapper {
+            grid-template-columns: 1fr;
+            text-align: center;
+            gap: 3rem;
+        }
+
+        .breadcrumb-classic {
+            justify-content: center;
+        }
+
+        .hero-subtitle {
+            margin: 0 auto 2.5rem;
+        }
+
+        .hero-actions {
+            justify-content: center;
+        }
+
+        .hero-stats-card {
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 2rem;
+        }
+
+        .stat-divider {
+            width: 1px;
+            height: auto;
+            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.1), transparent);
+        }
+    }
+
+    @media (max-width: 640px) {
+        .clothing-hero-premium {
+            padding: 120px 0 80px;
+        }
+
+        .hero-stats-card {
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .stat-divider {
+            width: 100%;
+            height: 1px;
+        }
+        
+        .btn-explore {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
 
 <!-- Filter & Products Area -->
 <section class="section" style="background: var(--bg-light);">
